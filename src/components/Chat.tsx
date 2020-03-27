@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
-import { useHistory, useParams } from 'react-router';
-import queryString from 'query-string';
+import { RouteComponentProps } from 'react-router';
 import styled from 'styled-components';
 
 import {
@@ -20,20 +19,24 @@ const StyeldChat = styled.div``;
 
 let socket: SocketIOClient.Socket;
 
-const Chat: React.FC = () => {
-  const history = useHistory();
+interface MatchParams {
+  room: string;
+}
+
+const Chat: React.FC<RouteComponentProps<MatchParams>> = ({
+  history,
+  location,
+  match,
+}) => {
   const [user, setUser] = useState<UserType>(null!);
   const [users, setUsers] = useState<UserType[]>([]);
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState<MessageType[]>([]);
 
-  const { name } = queryString.parse(history.location.search);
-  const { room } = useParams();
-
-  console.log(name, room);
-  if (!name || !room) history.push('/');
-
   useEffect(() => {
+    const { room } = match.params;
+    const name = location.hash.replace('#', '');
+
     socket = io(ENDPOINT);
 
     socket.emit(
@@ -44,11 +47,11 @@ const Chat: React.FC = () => {
         if (user) setUser(user);
       }
     );
+
     return () => {
       socket.emit('disconnect');
-      socket.off('');
     };
-  }, [name, room]);
+  }, [match.params, location.hash]);
 
   useEffect(() => {
     socket.on('message', (message: MessageType) => {
@@ -61,14 +64,19 @@ const Chat: React.FC = () => {
 
     return () => {
       socket.emit('disconnect');
-      socket.off('');
     };
-  }, [messages, users]);
+  }, [messages]);
 
   const sendMessage = (e: React.FormEvent) => {
     e.preventDefault();
     if (message) {
-      socket.emit('sendMessage', message, () => setMessage(''));
+      socket.emit('sendMessage', message, (error: string) => {
+        setMessage('');
+        if (error) {
+          socket.emit('disconnect');
+          history.push('/', { error });
+        }
+      });
     }
   };
 

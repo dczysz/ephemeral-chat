@@ -34,13 +34,8 @@ interface Props {
 }
 
 const Message: React.FC<Props> = ({ message: { user, text }, name }) => {
-  let isSentByCurrentUser = false;
-
   const trimmedName = name.trim().toLowerCase();
-
-  if (user === trimmedName) {
-    isSentByCurrentUser = true;
-  }
+  const isSentByCurrentUser = user === trimmedName;
 
   return (
     <StyledMessage fromCurrentUser={isSentByCurrentUser}>

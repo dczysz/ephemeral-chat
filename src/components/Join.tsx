@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useHistory } from 'react-router';
+import { RouteComponentProps, StaticContext } from 'react-router';
 
 const StyledJoin = styled.div`
   height: 100vh;
@@ -9,10 +9,30 @@ const StyledJoin = styled.div`
   align-items: center;
 `;
 
-const Join: React.FC = () => {
+const defaultVal = {
+  name: 'anonymous',
+  room: 'general',
+};
+
+interface HistoryState {
+  error?: string;
+}
+
+const Join: React.FC<RouteComponentProps<{}, StaticContext, HistoryState>> = ({
+  history,
+}) => {
   const [name, setName] = useState('');
   const [room, setRoom] = useState('');
-  const history = useHistory();
+
+  // Show error message if it's the reason for being at /
+  useEffect(() => {
+    if (!history.location.state) return;
+    const { error } = history.location.state;
+    if (error) {
+      history.replace('/');
+      alert(error); //TODO
+    }
+  }, [history]);
 
   const fixUserInput = (input: string, defaultVal: string) =>
     input.trim() === '' ? defaultVal : input.trim();
@@ -20,9 +40,9 @@ const Join: React.FC = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     history.push(
-      `/chat/${fixUserInput(room, 'general')}?name=${fixUserInput(
+      `/chat/${fixUserInput(room, defaultVal.room)}#${fixUserInput(
         name,
-        'anonymous'
+        defaultVal.name
       )}`
     );
   };

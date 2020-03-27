@@ -1,13 +1,20 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
+
 import Join from './components/Join';
 import Chat from './components/Chat';
 
 const App = () => {
   return (
     <BrowserRouter>
-      <Route path="/" exact component={Join} />
-      <Route path="/chat/:room" component={Chat} />
+      <Switch>
+        <Route exact path="/" component={Join} />
+        <Route path="/chat/:room" component={Chat} />
+        <Route>
+          {/* Default to '/' if no match */}
+          <Redirect to="/" />
+        </Route>
+      </Switch>
     </BrowserRouter>
   );
 };
