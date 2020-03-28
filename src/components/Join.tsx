@@ -7,15 +7,20 @@ const StyledJoin = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  h1 {
+    text-align: center;
+  }
 `;
 
-const defaultVal = {
+const defaultVals = {
   name: 'anonymous',
   room: 'general',
 };
 
 interface HistoryState {
   error?: string;
+  name?: string;
 }
 
 const Join: React.FC<RouteComponentProps<{}, StaticContext, HistoryState>> = ({
@@ -24,27 +29,34 @@ const Join: React.FC<RouteComponentProps<{}, StaticContext, HistoryState>> = ({
   const [name, setName] = useState('');
   const [room, setRoom] = useState('');
 
-  // Show error message if it's the reason for being at /
   useEffect(() => {
-    if (!history.location.state) return;
-    const { error } = history.location.state;
-    if (error) {
-      history.replace('/');
-      alert(error); //TODO
+    console.log('Join useEffect [history]');
+
+    // Show error message if it's the reason for being at /
+    if (history.location.state) {
+      const { error } = history.location.state;
+      if (error) {
+        history.replace('/'); // Clear error
+        alert(error); //TODO
+      }
     }
   }, [history]);
 
-  const fixUserInput = (input: string, defaultVal: string) =>
-    input.trim() === '' ? defaultVal : input.trim();
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    console.log('handling submit');
     e.preventDefault();
-    history.push(
-      `/chat/${fixUserInput(room, defaultVal.room)}#${fixUserInput(
-        name,
-        defaultVal.name
-      )}`
-    );
+
+    // Fix user input and apply defaults if necessary
+    const _name = name.trim().length
+      ? name.trim().toLowerCase()
+      : defaultVals.name;
+    const _room = room.trim().length
+      ? room.trim().toLowerCase()
+      : defaultVals.room;
+
+    history.push(`/chat/${_room}`, {
+      name: _name,
+    });
   };
 
   return (
@@ -54,17 +66,17 @@ const Join: React.FC<RouteComponentProps<{}, StaticContext, HistoryState>> = ({
         <form onSubmit={handleSubmit}>
           <div>
             <input
-              placeholder="anonymous"
+              placeholder={defaultVals.name}
               type="text"
-              onChange={e => setName(e.target.value)}
+              onChange={e => setName(e.target.value.trim().toLowerCase())}
               value={name}
             />
           </div>
           <div>
             <input
-              placeholder="general"
+              placeholder={defaultVals.room}
               type="text"
-              onChange={e => setRoom(e.target.value)}
+              onChange={e => setRoom(e.target.value.trim().toLowerCase())}
               value={room}
             />
           </div>
