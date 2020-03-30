@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { RouteComponentProps, StaticContext } from 'react-router';
 
@@ -28,19 +28,6 @@ const Join: React.FC<RouteComponentProps<{}, StaticContext, HistoryState>> = ({
 }) => {
   const [name, setName] = useState('');
   const [room, setRoom] = useState('');
-
-  useEffect(() => {
-    console.log('Join useEffect [history]');
-
-    // Show error message if it's the reason for being at /
-    if (history.location.state) {
-      const { error } = history.location.state;
-      if (error) {
-        history.replace('/'); // Clear error
-        alert(error); //TODO
-      }
-    }
-  }, [history]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     console.log('handling submit');

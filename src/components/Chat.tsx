@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 import { RouteComponentProps, StaticContext } from 'react-router';
-import styled from 'styled-components';
 
 import {
   ENDPOINT,
@@ -13,9 +12,11 @@ import {
 import InfoBar from './InfoBar';
 import Input from './Input';
 import Messages from './Messages';
+import Sidebar from './Sidebar';
+import ErrorModal from './ErrorModal';
 import UserList from './UserList';
-
-const StyeldChat = styled.div``;
+import { StyeldChat } from './styles';
+import useClickOutside from '../hooks/useClickOutside';
 
 let socket: SocketIOClient.Socket;
 
@@ -32,11 +33,18 @@ const Chat: React.FC<RouteComponentProps<
   MatchParams,
   StaticContext,
   HistoryState
->> = ({ history, location, match }) => {
-  const [user, setUser] = useState<UserType>(null!);
+>> = ({ history, match }) => {
+  const [user, setUser] = useState<UserType>({ name: '', room: '' });
   const [users, setUsers] = useState<UserType[]>([]);
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState<MessageType[]>([]);
+  const [showSidebar, setShowSidebar] = useState(false);
+  const [errorStr, setErrorStr] = useState<string | null>(null);
+  const sidebarRef = useRef(null!);
+
+  useClickOutside(sidebarRef, () =>
+    showSidebar ? setShowSidebar(false) : null
+  );
 
   // Connect socket to server
   useEffect(() => {
@@ -51,6 +59,7 @@ const Chat: React.FC<RouteComponentProps<
     if (socket) {
       console.log('Existing socket found, disconnecting before rejoining');
       socket.emit('disconnect');
+      socket.close();
     }
 
     socket = io(ENDPOINT);
@@ -59,7 +68,7 @@ const Chat: React.FC<RouteComponentProps<
       'join',
       { name, room },
       ({ user, error }: JoinRoomResponseType) => {
-        if (error) console.log(error);
+        if (error) setErrorStr(error);
         if (user) setUser(user);
       }
     );
@@ -68,7 +77,7 @@ const Chat: React.FC<RouteComponentProps<
       socket.off('join');
       socket.emit('disconnect');
     };
-  }, [match.params, location, history.location.state]);
+  }, [match.params, history.location.state]);
 
   useEffect(() => {
     socket.on('message', (message: MessageType) => {
@@ -88,36 +97,57 @@ const Chat: React.FC<RouteComponentProps<
 
   const sendMessage = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!socket) {
-      history.push('/', { error: 'Connection to server lost' });
-    }
-
-    if (message) {
-      socket.emit('sendMessage', message, (error: string) => {
-        setMessage('');
-        if (error) {
-          socket.emit('disconnect');
-          history.push('/', { error });
-        }
-      });
+    if (socket) {
+      if (message) {
+        socket.emit('sendMessage', message, (error: string) => {
+          setMessage('');
+          if (error) setErrorStr(error);
+        });
+      }
+    } else {
+      setErrorStr('Connection to server lost');
     }
   };
 
+  const exitToHome = () => {
+    socket.off('join');
+    socket.off('message');
+    socket.off('roomData');
+    socket.emit('disconnect');
+    socket.close();
+    history.push('/', { error: errorStr || 'Unknown error' });
+  };
+
   return (
-    <StyeldChat>
-      {user && (
-        <div>
-          <InfoBar room={user.room} />
-          <Messages messages={messages} name={user.name} />
-          <Input
-            message={message}
-            setMessage={setMessage}
-            sendMessage={sendMessage}
-            name={user.name}
-          />
-        </div>
+    <StyeldChat showSidebar={showSidebar}>
+      {errorStr ? (
+        <ErrorModal error={errorStr} onClick={exitToHome} />
+      ) : (
+        <>
+          <div className="nav">
+            <InfoBar
+              room={user.room}
+              showSidebar={() => setShowSidebar(true)}
+            />
+          </div>
+          <div className="messages">
+            <Messages messages={messages} name={user.name} />
+          </div>
+          <div className="input">
+            <Input
+              message={message}
+              setMessage={setMessage}
+              sendMessage={sendMessage}
+              name={user.name}
+            />
+          </div>
+          <div className="sidebar" ref={sidebarRef}>
+            <Sidebar>
+              <UserList users={users} />
+            </Sidebar>
+          </div>
+        </>
       )}
-      <UserList users={users} />
     </StyeldChat>
   );
 };

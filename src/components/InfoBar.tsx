@@ -1,43 +1,23 @@
 import React from 'react';
-import styled from 'styled-components';
 
-const StyledInfoBar = styled.div`
-  background-color: #48f;
-  color: #fff;
-  display: flex;
-  justify-content: space-between;
-
-  a {
-    color: inherit;
-  }
-
-  .left {
-    display: flex;
-    align-items: center;
-
-    ::before {
-      content: '';
-      display: inline-block;
-      height: 1rem;
-      width: 1rem;
-      border-radius: 50%;
-      background-color: #4f8;
-      margin: 1rem;
-    }
-  }
-`;
+import { StyledInfoBar } from './styles';
+import { Link } from 'react-router-dom';
 
 interface Props {
   room: string;
+  showSidebar: () => void;
 }
 
-const InfoBar: React.FC<Props> = ({ room }) => (
+const InfoBar: React.FC<Props> = ({ room, showSidebar }) => (
   <StyledInfoBar>
     <div className="left">
       <h3>{room}</h3>
     </div>
     <div className="right">
-      <a href="/">Home</a>
+      <button onClick={showSidebar} className="show-users">
+        Users in room
+      </button>
+      <Link to="/">Leave Room</Link>
     </div>
   </StyledInfoBar>
 );

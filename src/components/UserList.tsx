@@ -1,20 +1,20 @@
 import React from 'react';
-import styled from 'styled-components';
 
 import { UserType } from '../store/socket';
+import { StyledUserList } from './styles';
 
-const StyledUserList = styled.div``;
-
-interface Props {
+export interface Props {
   users: UserType[];
 }
 
-const UserList: React.FC<Props> = ({ users }) => {
+const UserList: React.SFC<Props> = ({ users }) => {
   return (
     <StyledUserList>
-      {users.map(({ name }) => (
-        <div key={name}>{name}</div>
-      ))}
+      <ul>
+        {users.map(({ name }) => (
+          <li key={name}>{name}</li>
+        ))}
+      </ul>
     </StyledUserList>
   );
 };

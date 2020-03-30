@@ -1,9 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
 
-const StyledInput = styled.form`
-  display: flex;
-`;
+import { StyledInput } from './styles';
 
 interface Props {
   message: string;
