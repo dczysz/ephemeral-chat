@@ -3,24 +3,21 @@ import React from 'react';
 import { StyledInput } from './styles';
 
 interface Props {
-  message: string;
-  setMessage: (message: string) => void;
-  sendMessage: (e: React.FormEvent<HTMLFormElement>) => void;
-  name: string;
+  value: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder?: string;
 }
 
-const Input: React.FC<Props> = ({ message, setMessage, sendMessage, name }) => {
+const Input: React.SFC<Props> = ({ value, onChange, placeholder }) => {
   return (
-    <StyledInput onSubmit={sendMessage}>
-      <p>{name}</p>
-      <input
+    <>
+      <StyledInput
         type="text"
-        placeholder="Type a message..."
-        value={message}
-        onChange={e => setMessage(e.target.value)}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder || ''}
       />
-      <button type="submit">Send</button>
-    </StyledInput>
+    </>
   );
 };
 

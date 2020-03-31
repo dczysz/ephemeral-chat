@@ -1,17 +1,9 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { RouteComponentProps, StaticContext } from 'react-router';
 
-const StyledJoin = styled.div`
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  h1 {
-    text-align: center;
-  }
-`;
+import { StyledJoin } from './styles';
+import Input from './Input';
+import Button from './Button';
 
 const defaultVals = {
   name: 'anonymous',
@@ -48,27 +40,29 @@ const Join: React.FC<RouteComponentProps<{}, StaticContext, HistoryState>> = ({
 
   return (
     <StyledJoin>
-      <div>
-        <h1>Join</h1>
+      <div className="modal">
+        <h1>join</h1>
         <form onSubmit={handleSubmit}>
-          <div>
-            <input
+          <label>
+            <span>name</span>
+            <Input
               placeholder={defaultVals.name}
-              type="text"
               onChange={e => setName(e.target.value.trim().toLowerCase())}
               value={name}
             />
-          </div>
-          <div>
-            <input
+          </label>
+          <label>
+            <span>room</span>
+            <Input
               placeholder={defaultVals.room}
-              type="text"
               onChange={e => setRoom(e.target.value.trim().toLowerCase())}
               value={room}
             />
-          </div>
+          </label>
 
-          <button type="submit">Join</button>
+          <Button type="submit" primary>
+            Join
+          </Button>
         </form>
       </div>
     </StyledJoin>

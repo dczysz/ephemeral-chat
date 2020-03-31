@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledSidebar = styled.div`
-  width: 16rem;
+  background-color: ${p => p.theme.colors.bgDark};
   height: 100%;
-  background-color: ${p => p.theme.bgLight};
+  width: 16rem;
 `;

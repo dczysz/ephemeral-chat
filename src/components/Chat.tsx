@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 import { RouteComponentProps, StaticContext } from 'react-router';
 
+import { StyeldChat } from './styles';
 import {
   ENDPOINT,
   UserType,
@@ -10,12 +11,11 @@ import {
   RoomDataType,
 } from '../store/socket';
 import InfoBar from './InfoBar';
-import Input from './Input';
+import MessageInput from './MessageInput';
 import Messages from './Messages';
 import Sidebar from './Sidebar';
 import ErrorModal from './ErrorModal';
 import UserList from './UserList';
-import { StyeldChat } from './styles';
 import useClickOutside from '../hooks/useClickOutside';
 
 let socket: SocketIOClient.Socket;
@@ -124,6 +124,11 @@ const Chat: React.FC<RouteComponentProps<
         <ErrorModal error={errorStr} onClick={exitToHome} />
       ) : (
         <>
+          <div className="sidebar" ref={sidebarRef}>
+            <Sidebar>
+              <UserList users={users} name={user.name} />
+            </Sidebar>
+          </div>
           <div className="nav">
             <InfoBar
               room={user.room}
@@ -134,17 +139,12 @@ const Chat: React.FC<RouteComponentProps<
             <Messages messages={messages} name={user.name} />
           </div>
           <div className="input">
-            <Input
+            <MessageInput
               message={message}
               setMessage={setMessage}
               sendMessage={sendMessage}
               name={user.name}
             />
-          </div>
-          <div className="sidebar" ref={sidebarRef}>
-            <Sidebar>
-              <UserList users={users} />
-            </Sidebar>
           </div>
         </>
       )}

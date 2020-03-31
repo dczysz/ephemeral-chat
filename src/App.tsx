@@ -2,13 +2,15 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 
-import { theme } from './components/styles';
+import { theme, GlobalStyle } from './components/styles';
 import Join from './components/Join';
 import Chat from './components/Chat';
 
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
+      <GlobalStyle theme={theme} />
+
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={Join} />

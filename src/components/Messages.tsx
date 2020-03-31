@@ -1,10 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
 
+import { StyledMessages } from './styles';
 import Message from './Message';
 import { MessageType } from '../store/socket';
-
-const StyledMessages = styled.div``;
 
 interface Props {
   messages: MessageType[];

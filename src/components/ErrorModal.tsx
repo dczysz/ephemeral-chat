@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { StyledErrorModal } from './styles';
+import Button from './Button';
 
 export interface Props {
   error: string;
@@ -11,9 +12,11 @@ const ErrorModal: React.FC<Props> = ({ error, onClick }) => {
   return (
     <StyledErrorModal>
       <div>
-        <h1>Error</h1>
+        <h1>uh oh!</h1>
         <p>{error}</p>
-        <button onClick={onClick}>Click here</button>
+        <Button primary onClick={onClick}>
+          go home
+        </Button>
       </div>
     </StyledErrorModal>
   );

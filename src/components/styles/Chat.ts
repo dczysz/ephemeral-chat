@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 
-export const StyeldChat = styled.div`
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
-  background-color: ${p => p.theme.bgDark};
+interface Props {
+  showSidebar: boolean;
+}
+
+export const StyeldChat = styled.div<Props>`
+  background-color: ${p => p.theme.colors.bg};
+  color: ${p => p.theme.colors.text};
   display: grid;
   grid-template-columns: 1fr auto;
   grid-template-rows: auto 1fr auto;
@@ -12,34 +14,35 @@ export const StyeldChat = styled.div`
     'nav nav'
     'messages messages'
     'input input';
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
 
   .nav {
     grid-area: nav;
   }
 
   .messages {
-    display: flex;
-    flex-direction: column;
     grid-area: messages;
+    overflow: hidden; /* Needed or else parent grows */
   }
   .input {
     grid-area: input;
   }
 
   .sidebar {
-    --translate: ${(p: { showSidebar: boolean }) =>
-      p.showSidebar ? '0%' : '100%'}
+    bottom: 0;
     grid-area: sidebar;
     position: absolute;
     right: 0;
     top: 0;
-    bottom: 0;
-    transform: translateX(${(p: { showSidebar: boolean }) =>
-      p.showSidebar ? '0%' : '100%'});
+    transform: translateX(
+      ${(p: { showSidebar: boolean }) => (p.showSidebar ? '0%' : '100%')}
+    );
     transition: transform 0.2s;
   }
 
-  @media (min-width: ${p => p.theme.bpLaptop}) {
+  @media (min-width: ${p => p.theme.bp.laptop}) {
     grid-template-areas:
       'nav nav'
       'messages sidebar'

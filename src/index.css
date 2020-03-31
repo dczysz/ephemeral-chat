@@ -1,5 +1,23 @@
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  font-family: inherit;
+}
+
 html,
 body {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
   margin: 0;
   padding: 0;
+}
+
+h1 {
+  margin: 1rem 0;
+}
+
+input,
+button {
+  font-size: 0.8rem;
 }
