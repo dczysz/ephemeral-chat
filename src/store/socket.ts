@@ -1,4 +1,7 @@
-export const ENDPOINT = 'localhost:5000';
+export const ENDPOINT =
+  process.env.NODE_ENV === 'production'
+    ? 'https://serene-savannah-11228.herokuapp.com/'
+    : 'localhost:5000';
 
 export type UserType = {
   id?: string;
