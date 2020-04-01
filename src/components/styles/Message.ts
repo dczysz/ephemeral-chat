@@ -18,9 +18,9 @@ export const StyledMessage = styled.div<Props>`
     background-color: var(--bg);
     border-radius: 0.5rem;
     margin: 0 1rem;
-    padding: 1rem;
-    word-break: break-all;
     max-width: ${p => p.theme.bp.tablet};
+    padding: 1rem;
+    word-break: break-word;
 
     p {
       margin: 0;
