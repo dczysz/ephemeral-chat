@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledInfoBar = styled.div`
+  background-color: ${p => p.theme.colors.bgDark};
   box-shadow: 0 2px 6px ${p => p.theme.colors.bgDarker};
   color: ${p => p.theme.colors.text};
   display: flex;

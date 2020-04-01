@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const StyledUserList = styled.div`
   ul {
+    color: ${p => p.theme.colors.textMuted};
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -13,8 +14,8 @@ export const StyledUserList = styled.div`
       padding: 1rem;
 
       &.current-user {
+        color: ${p => p.theme.colors.text};
         font-weight: bold;
-        color: ${p => p.theme.colors.textMuted};
       }
 
       ::before {
