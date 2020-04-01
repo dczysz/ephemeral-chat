@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { RouteComponentProps, StaticContext } from 'react-router';
 
 import { StyledJoin } from './styles';
+import { MAX_NAME_LENGTH, MAX_ROOM_LENGTH } from '../store/socket';
+import { validateInput } from '../util';
 import Input from './Input';
 import Button from './Button';
 
@@ -22,19 +24,29 @@ const Join: React.FC<RouteComponentProps<{}, StaticContext, HistoryState>> = ({
   const [room, setRoom] = useState('');
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    console.log('handling submit');
     e.preventDefault();
 
     // Fix user input and apply defaults if necessary
-    const _name = name.trim().length
-      ? name.trim().toLowerCase()
-      : defaultVals.name;
-    const _room = room.trim().length
-      ? room.trim().toLowerCase()
-      : defaultVals.room;
+    const fixedName = validateInput(
+      name.toLowerCase(),
+      MAX_NAME_LENGTH,
+      defaultVals.name
+    );
+    const fixedRoom = validateInput(
+      room.toLowerCase(),
+      MAX_ROOM_LENGTH,
+      defaultVals.room
+    );
 
-    history.push(`/chat/${_room}`, {
-      name: _name,
+    //TODO better error message
+    if (!fixedName.length) {
+      alert('Invalid name');
+    } else if (!fixedRoom.length) {
+      alert('Invalid room');
+    }
+
+    history.push(`/chat/${fixedRoom}`, {
+      name: fixedName,
     });
   };
 
@@ -49,6 +61,7 @@ const Join: React.FC<RouteComponentProps<{}, StaticContext, HistoryState>> = ({
               placeholder={defaultVals.name}
               onChange={e => setName(e.target.value.trim().toLowerCase())}
               value={name}
+              maxLength={MAX_NAME_LENGTH}
             />
           </label>
           <label>
@@ -57,6 +70,7 @@ const Join: React.FC<RouteComponentProps<{}, StaticContext, HistoryState>> = ({
               placeholder={defaultVals.room}
               onChange={e => setRoom(e.target.value.trim().toLowerCase())}
               value={room}
+              maxLength={MAX_ROOM_LENGTH}
             />
           </label>
 

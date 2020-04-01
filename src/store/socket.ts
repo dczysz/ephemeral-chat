@@ -3,6 +3,10 @@ export const ENDPOINT =
     ? 'https://serene-savannah-11228.herokuapp.com/'
     : 'localhost:5000';
 
+export const MAX_NAME_LENGTH = 12;
+export const MAX_ROOM_LENGTH = 12;
+export const MAX_MESSAGE_LENGTH = 2000;
+
 export type UserType = {
   id?: string;
   name: string;

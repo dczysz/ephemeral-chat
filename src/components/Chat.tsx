@@ -9,6 +9,7 @@ import {
   JoinRoomResponseType,
   MessageType,
   RoomDataType,
+  MAX_MESSAGE_LENGTH,
 } from '../store/socket';
 import InfoBar from './InfoBar';
 import MessageInput from './MessageInput';
@@ -17,6 +18,7 @@ import Sidebar from './Sidebar';
 import ErrorModal from './ErrorModal';
 import UserList from './UserList';
 import useClickOutside from '../hooks/useClickOutside';
+import { validateInput } from '../util';
 
 let socket: SocketIOClient.Socket;
 
@@ -99,7 +101,17 @@ const Chat: React.FC<RouteComponentProps<
     e.preventDefault();
     if (socket) {
       if (message) {
-        socket.emit('sendMessage', message, (error: string) => {
+        const _message = validateInput(message, MAX_MESSAGE_LENGTH);
+
+        //TODO better error message
+        if (!_message.length) {
+          alert(
+            'Sorry, that message is too long.\nFile upload will be available in the future.'
+          );
+          return;
+        }
+
+        socket.emit('sendMessage', _message, (error: string) => {
           setMessage('');
           if (error) setErrorStr(error);
         });
