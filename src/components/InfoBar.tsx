@@ -13,17 +13,18 @@ const InfoBar: React.FC<Props> = ({ room, showSidebar }) => (
   <StyledInfoBar>
     <div className="container">
       <div className="left">
+        <Link to="/">
+          <h2>
+            ephemeral <span className="tablet-hidden">chat</span>
+          </h2>
+        </Link>
+        <span id="hash">#</span>
         <h3>{room}</h3>
       </div>
       <div className="right">
         <Button type="button" onClick={showSidebar} className="tablet-only">
           users
         </Button>
-        <Link to="/">
-          <Button danger type="button">
-            leave room
-          </Button>
-        </Link>
       </div>
     </div>
   </StyledInfoBar>

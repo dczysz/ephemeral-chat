@@ -11,6 +11,7 @@ export const StyledInfoBar = styled.div`
   .container {
     align-items: center;
     display: flex;
+    flex-wrap: nowrap;
     justify-content: space-between;
     max-width: ${p => p.theme.bp.desktop};
     width: 100%;
@@ -21,22 +22,31 @@ export const StyledInfoBar = styled.div`
     text-decoration: none;
   }
 
-  h3 {
-    margin: 0;
-  }
-
   .left {
     align-items: center;
     display: flex;
 
-    ::before {
+    h2 {
+      margin: 0;
+    }
+
+    h3 {
+      margin: 0;
+      max-width: 30vw; /* clip to leave room for other stuff */
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      @media screen and (min-width: ${p => p.theme.bp.tablet}) {
+        max-width: none;
+      }
+    }
+
+    #hash {
       color: ${p => p.theme.colors.textMuted};
-      content: '#';
-      display: inline-block;
-      margin-right: 0.5rem;
-      height: auto;
-      width: auto;
-      font-size: 2rem;
+      font-size: 1.8rem;
+      margin-left: 1rem;
+      margin-right: 0.25rem;
     }
   }
 

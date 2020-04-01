@@ -5,8 +5,17 @@ interface Props {
 }
 
 export const GlobalStyle = createGlobalStyle<Props>`
+  html,
+  body {
+    @media screen and (max-width: ${p => p.theme.bp.tablet}) {
+      font-size: 95%;
+    }
+
+  }
+
   body {
     background-color: ${p => p.theme.colors.bg};
+
   }
 
   ::selection {
@@ -20,10 +29,16 @@ export const GlobalStyle = createGlobalStyle<Props>`
     }
   }
 
+  .tablet-hidden {
+    @media screen and (max-width: ${p => p.theme.bp.laptop}) {
+      display: none;
+    }
+  }
+
   input[type="text"] {
     ::placeholder {
       color: ${p => p.theme.colors.textMuted};
-      opacity: 1;
+      opacity: 1; /* Firefox lowers opacity */
     }
   }
 `;
