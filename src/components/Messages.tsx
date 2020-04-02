@@ -13,9 +13,7 @@ const Messages: React.FC<Props> = ({ messages, name }) => {
   return (
     <StyledMessages>
       {messages.map((msg, i) => (
-        <div key={i}>
-          <Message name={name} message={msg} />
-        </div>
+        <Message key={i} name={name} message={msg} />
       ))}
     </StyledMessages>
   );
