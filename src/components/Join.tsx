@@ -59,7 +59,7 @@ const Join: React.FC<RouteComponentProps<{}, StaticContext, HistoryState>> = ({
             <span>name</span>
             <Input
               placeholder={defaultVals.name}
-              onChange={e => setName(e.target.value.trim().toLowerCase())}
+              onChange={e => setName(e.target.value.toLowerCase())}
               value={name}
               maxLength={MAX_NAME_LENGTH}
             />
@@ -68,7 +68,7 @@ const Join: React.FC<RouteComponentProps<{}, StaticContext, HistoryState>> = ({
             <span>room</span>
             <Input
               placeholder={defaultVals.room}
-              onChange={e => setRoom(e.target.value.trim().toLowerCase())}
+              onChange={e => setRoom(e.target.value.toLowerCase())}
               value={room}
               maxLength={MAX_ROOM_LENGTH}
             />

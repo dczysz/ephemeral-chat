@@ -106,7 +106,7 @@ const Chat: React.FC<RouteComponentProps<
         //TODO better error message
         if (!_message.length) {
           alert(
-            'Sorry, that message is too long.\nFile upload will be available in the future.'
+            'Sorry, that message is not allowed.\nFile upload may be available in the future.'
           );
           return;
         }

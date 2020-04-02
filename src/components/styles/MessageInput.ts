@@ -11,6 +11,7 @@ export const StyledMessageInput = styled.form`
   p {
     color: ${p => p.theme.colors.textMuted};
     margin: 0;
+    white-space: nowrap;
   }
 
   input[type='text'] {
