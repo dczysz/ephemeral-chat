@@ -155,7 +155,7 @@ const Chat: React.FC<RouteComponentProps<
               message={message}
               setMessage={setMessage}
               sendMessage={sendMessage}
-              name={user.name}
+              name={`${user.name}#${user.num || ''}`}
             />
           </div>
         </>
