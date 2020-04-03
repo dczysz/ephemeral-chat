@@ -1,21 +1,26 @@
 import React from 'react';
-import { MessageType } from '../store/socket';
+import { MessageType, UserType } from '../store/socket';
 
 import { StyledMessage } from './styles';
 
 interface Props {
   message: MessageType;
-  name: string;
+  currentUser: UserType;
 }
 
-const Message: React.FC<Props> = ({ message: { user, text }, name }) => {
-  const trimmedName = name.trim().toLowerCase();
-  const isSentByCurrentUser = user === trimmedName;
+const Message: React.FC<Props> = ({ message: { user, text }, currentUser }) => {
+  const isSentByCurrentUser =
+    currentUser.name === user.name && user.num && currentUser.num === user.num
+      ? true
+      : false;
+
+  // Only apply #num if not admin
+  const messageFromName = user.name + (user.num ? `#${user.num}` : '');
 
   return (
     <StyledMessage fromCurrentUser={isSentByCurrentUser}>
       <div className="sent-by">
-        <p>{user}</p>
+        <p>{messageFromName}</p>
       </div>
       <div className="message-text">
         <p>{text}</p>

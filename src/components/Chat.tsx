@@ -138,7 +138,7 @@ const Chat: React.FC<RouteComponentProps<
         <>
           <div className="sidebar" ref={sidebarRef}>
             <Sidebar>
-              <UserList users={users} name={user.name} />
+              <UserList users={users} currentUser={user} />
             </Sidebar>
           </div>
           <div className="nav">
@@ -148,7 +148,7 @@ const Chat: React.FC<RouteComponentProps<
             />
           </div>
           <div className="messages">
-            <Messages messages={messages} name={user.name} />
+            <Messages messages={messages} currentUser={user} />
           </div>
           <div className="input">
             <MessageInput

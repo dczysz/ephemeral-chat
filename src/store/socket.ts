@@ -9,6 +9,7 @@ export const MAX_MESSAGE_LENGTH = 2000;
 
 export type UserType = {
   id?: string;
+  num?: number;
   name: string;
   room: string;
 };
@@ -24,6 +25,6 @@ export type RoomDataType = {
 };
 
 export type MessageType = {
-  user: string;
+  user: UserType;
   text: string;
 };

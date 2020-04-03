@@ -5,19 +5,21 @@ import { UserType } from '../store/socket';
 
 interface Props {
   users: UserType[];
-  name: string;
+  currentUser: UserType;
 }
 
-const UserList: React.SFC<Props> = ({ users, name }) => {
+const UserList: React.SFC<Props> = ({ users, currentUser }) => {
+  console.log(users);
+
   return (
     <StyledUserList>
       <ul>
         {users.map(usr => (
           <li
-            key={usr.name}
-            className={usr.name === name ? 'current-user' : ''}
+            key={usr.num}
+            className={usr.num === currentUser.num ? 'current-user' : ''}
           >
-            {usr.name}
+            {`${usr.name}#${usr.num}`}
           </li>
         ))}
       </ul>

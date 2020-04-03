@@ -2,14 +2,14 @@ import React, { useEffect, useRef } from 'react';
 
 import { StyledMessages } from './styles';
 import Message from './Message';
-import { MessageType } from '../store/socket';
+import { MessageType, UserType } from '../store/socket';
 
 interface Props {
   messages: MessageType[];
-  name: string;
+  currentUser: UserType;
 }
 
-const Messages: React.FC<Props> = ({ messages, name }) => {
+const Messages: React.FC<Props> = ({ messages, currentUser }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null!);
 
   // Scroll to bottom on new message
@@ -27,7 +27,7 @@ const Messages: React.FC<Props> = ({ messages, name }) => {
   return (
     <StyledMessages>
       {messages.map((msg, i) => (
-        <Message key={i} name={name} message={msg} />
+        <Message key={i} currentUser={currentUser} message={msg} />
       ))}
       <div ref={messagesEndRef} />
       {<div className="bottom-banner">{}</div>}
