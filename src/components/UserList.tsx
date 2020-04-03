@@ -9,8 +9,6 @@ interface Props {
 }
 
 const UserList: React.SFC<Props> = ({ users, currentUser }) => {
-  console.log(users);
-
   return (
     <StyledUserList>
       <ul>
