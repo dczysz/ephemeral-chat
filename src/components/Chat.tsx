@@ -112,8 +112,7 @@ const Chat: React.FC<RouteComponentProps<
         }
 
         socket.emit('sendMessage', _message, (error: string) => {
-          setMessage('');
-          if (error) setErrorStr(error);
+          error ? setErrorStr(error) : setMessage('');
         });
       }
     } else {
