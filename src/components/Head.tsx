@@ -5,7 +5,7 @@ export interface Props {
   page?: string;
 }
 
-const Head: React.SFC<Props> = ({ title, page }) => {
+const Head: React.FC<Props> = ({ title, page }) => {
   const animateTitle = (title: string, timeMs = 50, last = 0) => {
     if (!title.length) return;
 

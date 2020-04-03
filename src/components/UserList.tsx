@@ -8,7 +8,7 @@ interface Props {
   currentUser: UserType;
 }
 
-const UserList: React.SFC<Props> = ({ users, currentUser }) => {
+const UserList: React.FC<Props> = ({ users, currentUser }) => {
   return (
     <StyledUserList>
       <ul>
