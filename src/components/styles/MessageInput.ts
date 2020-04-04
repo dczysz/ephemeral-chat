@@ -23,6 +23,7 @@ export const StyledMessageInput = styled.form<Props>`
   }
 
   .input {
+    --time: ${p => p.theme.time.long};
     align-items: ${p => (p.expand ? 'flex-end' : 'center')};
     background-color: transparent;
     border: 2px solid transparent;
@@ -39,6 +40,9 @@ export const StyledMessageInput = styled.form<Props>`
 
       button[type='submit'] {
         box-shadow: ${p => p.theme.bs.raised};
+        color: ${p => p.theme.colors.textMuted};
+        pointer-events: all;
+        transition: box-shadow var(--time), color var(--time) var(--time);
 
         :hover,
         :active,
@@ -74,10 +78,12 @@ export const StyledMessageInput = styled.form<Props>`
       background-color: transparent;
       border: 2px solid transparent;
       border-radius: 1000px;
-      color: ${p => p.theme.colors.textMuted};
-      width: 2rem;
+      color: transparent;
       height: 2rem;
       margin: 0.5rem;
+      pointer-events: none;
+      transition: box-shadow var(--time), color var(--time);
+      width: 2rem;
     }
   }
 `;
