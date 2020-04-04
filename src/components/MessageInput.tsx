@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { MdSend } from 'react-icons/md';
 
 import { StyledMessageInput } from './styles';
 
@@ -52,7 +53,9 @@ const MessageInput: React.FC<Props> = ({
           rows={Math.min(6, message.split('\n').length)}
           ref={inputRef}
         />
-        <button type="submit">></button>
+        <button type="submit" aria-label="Send Message">
+          <MdSend />
+        </button>
       </div>
     </StyledMessageInput>
   );

@@ -5,7 +5,7 @@ interface Props {
 }
 
 export const StyledMessageInput = styled.form<Props>`
-  align-items: flex-start;
+  align-items: ${p => (p.expand ? 'flex-start' : 'center')};
   background-color: ${p => p.theme.colors.bgDark};
   box-shadow: 0 -2px 6px ${p => p.theme.colors.bgDarker};
   display: flex;
@@ -18,7 +18,6 @@ export const StyledMessageInput = styled.form<Props>`
 
   .name {
     color: ${p => p.theme.colors.textMuted};
-    margin-top: ${p => (p.expand ? '0' : '1rem')};
     white-space: nowrap;
   }
 
@@ -42,7 +41,7 @@ export const StyledMessageInput = styled.form<Props>`
         box-shadow: ${p => p.theme.bs.raised};
         color: ${p => p.theme.colors.textMuted};
         pointer-events: all;
-        transition: box-shadow var(--time), color var(--time) var(--time);
+        transition: box-shadow var(--time), color var(--time);
 
         :hover,
         :active,
@@ -53,12 +52,12 @@ export const StyledMessageInput = styled.form<Props>`
     }
 
     .placeholder {
-      bottom: 1rem;
       color: ${p => p.theme.colors.textMuted};
-      left: 1rem;
+      left: calc(1rem + 1px);
       pointer-events: none;
       position: absolute;
-      top: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
     }
 
     textarea {
@@ -66,8 +65,8 @@ export const StyledMessageInput = styled.form<Props>`
       border: none;
       color: ${p => p.theme.colors.text};
       height: 100%;
-      line-height: 1rem;
-      max-height: ${p => (p.expand ? 'none' : '3rem')};
+      line-height: 1.2rem;
+      max-height: ${p => (p.expand ? 'none' : '3.2rem')};
       overflow: ${p => (p.expand ? 'auto' : 'hidden')};
       padding: 1rem;
       resize: none;
@@ -75,15 +74,25 @@ export const StyledMessageInput = styled.form<Props>`
     }
 
     button[type='submit'] {
+      align-items: center;
       background-color: transparent;
       border: 2px solid transparent;
       border-radius: 1000px;
       color: transparent;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      margin-bottom: ${p => (p.expand ? '0.5rem' : 0)};
+      margin-right: 0.5rem;
       height: 2rem;
-      margin: 0.5rem;
+      width: 2rem;
       pointer-events: none;
       transition: box-shadow var(--time), color var(--time);
-      width: 2rem;
+
+      svg {
+        height: 0.9rem;
+        width: 0.9rem;
+      }
     }
   }
 `;
