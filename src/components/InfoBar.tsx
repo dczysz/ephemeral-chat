@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { TiThMenu } from 'react-icons/ti';
 
 import { StyledInfoBar } from './styles';
-import { Link } from 'react-router-dom';
 import Button from './Button';
 
 interface Props {
@@ -22,8 +23,12 @@ const InfoBar: React.FC<Props> = ({ room, showSidebar }) => (
         <h3>{room}</h3>
       </div>
       <div className="right">
-        <Button type="button" onClick={showSidebar} className="tablet-only">
-          users
+        <Button
+          type="button"
+          onClick={showSidebar}
+          className="tablet-only icon"
+        >
+          <TiThMenu />
         </Button>
       </div>
     </div>

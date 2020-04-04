@@ -65,6 +65,19 @@ export const StyledInfoBar = styled.div`
   .right {
     button {
       margin-left: 1rem;
+
+      &.icon {
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+          width: 1rem;
+          height: 1rem;
+          margin: 1em;
+        }
+      }
     }
   }
 `;
