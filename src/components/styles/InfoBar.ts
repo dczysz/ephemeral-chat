@@ -28,6 +28,21 @@ export const StyledInfoBar = styled.div`
 
     h2 {
       margin: 0;
+
+      :hover {
+        color: ${p => p.theme.colors.textMuted};
+      }
+    }
+
+    #hash,
+    h3 {
+      color: ${p => p.theme.colors.textMuted};
+    }
+
+    #hash {
+      font-size: 1.8rem;
+      margin-left: 1rem;
+      margin-right: 0.25rem;
     }
 
     h3 {
@@ -40,13 +55,6 @@ export const StyledInfoBar = styled.div`
       @media screen and (min-width: ${p => p.theme.bp.tablet}) {
         max-width: none;
       }
-    }
-
-    #hash {
-      color: ${p => p.theme.colors.textMuted};
-      font-size: 1.8rem;
-      margin-left: 1rem;
-      margin-right: 0.25rem;
     }
   }
 

@@ -24,18 +24,25 @@ export const StyledMessageInput = styled.form<Props>`
 
   .input {
     align-items: ${p => (p.expand ? 'flex-end' : 'center')};
-    background-color: ${p => p.theme.colors.bgLight};
-    border: ${p => p.theme.colors.bgDarker};
+    background-color: transparent;
+    border: 2px solid transparent;
     border-radius: ${p => p.theme.br};
+    box-shadow: ${p => p.theme.bs.raised};
     display: flex;
     margin-left: 1rem;
     position: relative;
     width: 100%;
+    transition: box-shadow ${p => p.theme.time.short};
+
+    :focus-within {
+      box-shadow: ${p => p.theme.bs.raised}, ${p => p.theme.bs.inset};
+    }
 
     .placeholder {
       bottom: 1rem;
       color: ${p => p.theme.colors.textMuted};
       left: 1rem;
+      pointer-events: none;
       position: absolute;
       top: 1rem;
     }

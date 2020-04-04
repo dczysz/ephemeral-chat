@@ -5,34 +5,22 @@ export interface StyledButtonProps {
   id?: string;
   onClick?: () => void;
   primary?: boolean;
-  danger?: boolean;
   type?: 'button' | 'submit' | 'reset';
 }
 
 export const StyledButton = styled.button<StyledButtonProps>`
-  background-color: ${p =>
-    p.primary ? p.theme.colors.primary : 'transparent'};
-  border: 2px solid
-    ${p =>
-      p.primary
-        ? p.theme.colors.primary
-        : p.danger
-        ? p.theme.colors.danger
-        : p.theme.colors.bgLight};
+  background-color: transparent;
+  border: 2px solid ${p => p.theme.colors.bgDark};
   border-radius: ${p => p.theme.br};
-  color: ${p => (p.danger ? p.theme.colors.danger : p.theme.colors.text)};
+  box-shadow: ${p => p.theme.bs.raised};
+  color: ${p => (p.primary ? p.theme.colors.primary : p.theme.colors.text)};
   cursor: pointer;
+  font-weight: bold;
   padding: 1em;
-  transition: all 0.2s;
 
-  :hover {
-    background-color: ${p =>
-      p.primary
-        ? p.theme.colors.primary
-        : p.danger
-        ? p.theme.colors.danger
-        : p.theme.colors.bgLight};
-    color: ${p => (p.danger ? p.theme.colors.bgDark : 'currentColor')};
-    transform: ${p => (p.primary ? 'translateY(2px)' : 'none')};
+  :hover,
+  :focus,
+  :active {
+    box-shadow: ${p => p.theme.bs.raised}, ${p => p.theme.bs.inset};
   }
 `;

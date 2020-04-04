@@ -5,6 +5,14 @@ interface Props {
 }
 
 export const GlobalStyle = createGlobalStyle<Props>`
+  *,
+  *::before,
+  *::after {
+    transition:
+      color ${p => p.theme.time.short},
+      background-color ${p => p.theme.time.short};
+  }
+
   html,
   body {
     @media screen and (max-width: ${p => p.theme.bp.tablet}) {
@@ -35,6 +43,11 @@ export const GlobalStyle = createGlobalStyle<Props>`
     }
   }
 
+  input[type="text"],
+  button {
+    transition: box-shadow ${p => p.theme.time.short}
+  }
+
   input[type="text"] {
     ::placeholder {
       color: ${p => p.theme.colors.textMuted};
@@ -42,8 +55,10 @@ export const GlobalStyle = createGlobalStyle<Props>`
     }
   }
 
+
   /* TODO focus styles */
-  button:focus,
+  button:focus {}
+
   input:focus,
   textarea:focus {
     outline: none;

@@ -7,7 +7,7 @@ const animation = keyframes`
 
 export const StyledErrorModal = styled.div`
   align-items: center;
-  animation: ${animation} 0.2s;
+  animation: ${animation} ${p => p.theme.time.long};
   background-color: ${p => p.theme.colors.bgDark}dd;
   bottom: 0;
   display: flex;

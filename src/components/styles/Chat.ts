@@ -39,7 +39,8 @@ export const StyeldChat = styled.div<Props>`
     transform: translateX(
       ${(p: { showSidebar: boolean }) => (p.showSidebar ? '0%' : '100%')}
     );
-    transition: transform 0.2s;
+    transition: transform ${p => p.theme.time.long};
+    z-index: 1;
   }
 
   @media (min-width: ${p => p.theme.bp.laptop}) {

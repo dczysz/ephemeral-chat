@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const StyledJoin = styled.div`
   align-items: top;
-  background-color: ${p => p.theme.colors.bgDark};
+  background-color: ${p => p.theme.colors.bgDarker};
   display: flex;
   height: 100vh;
   justify-content: center;
@@ -10,7 +10,7 @@ export const StyledJoin = styled.div`
   padding: 1rem;
 
   .modal {
-    background-color: ${p => p.theme.colors.bg};
+    background-color: ${p => p.theme.colors.bgDark};
     border-radius: ${p => p.theme.br};
     margin-bottom: auto;
     max-width: ${p => p.theme.bp.tablet};
