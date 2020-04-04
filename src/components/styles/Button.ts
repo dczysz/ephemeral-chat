@@ -18,6 +18,20 @@ export const StyledButton = styled.button<StyledButtonProps>`
   font-weight: bold;
   padding: 1em;
 
+  &.icon {
+    align-items: center;
+    color: ${p => p.theme.colors.textMuted};
+    display: flex;
+    justify-content: center;
+    padding: 0;
+
+    svg {
+      height: 1rem;
+      margin: 1em;
+      width: 1rem;
+    }
+  }
+
   :hover,
   :focus,
   :active {

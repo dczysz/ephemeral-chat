@@ -33,7 +33,7 @@ export const GlobalStyle = createGlobalStyle<Props>`
 
   .tablet-only {
     @media screen and (min-width: ${p => p.theme.bp.laptop}) {
-      display: none;
+      display: none !important;
     }
   }
 

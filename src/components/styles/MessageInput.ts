@@ -81,13 +81,14 @@ export const StyledMessageInput = styled.form<Props>`
       color: transparent;
       cursor: pointer;
       display: flex;
+      height: 2rem;
       justify-content: center;
       margin-bottom: ${p => (p.expand ? '0.5rem' : 0)};
       margin-right: 0.5rem;
-      height: 2rem;
-      width: 2rem;
+      padding: 0;
       pointer-events: none;
       transition: box-shadow var(--time), color var(--time);
+      width: 2rem;
 
       svg {
         height: 0.9rem;

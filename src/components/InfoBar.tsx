@@ -25,8 +25,9 @@ const InfoBar: React.FC<Props> = ({ room, showSidebar }) => (
       <div className="right">
         <Button
           type="button"
+          icon
           onClick={showSidebar}
-          className="tablet-only icon"
+          className="tablet-only"
         >
           <TiThMenu />
         </Button>
