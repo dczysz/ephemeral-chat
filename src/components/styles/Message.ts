@@ -25,12 +25,14 @@ export const StyledMessage = styled.div<Props>`
   .message-text {
     background-color: var(--bg);
     border-radius: 0.5rem;
-    max-width: ${p => p.theme.bp.tablet};
+    max-width: 100%;
     padding: 1rem;
-    word-break: break-word;
 
     pre {
       margin: 0;
+      max-width: ${p => p.theme.bp.tablet};
+      white-space: pre-wrap;
+      word-wrap: break-word;
     }
   }
 `;

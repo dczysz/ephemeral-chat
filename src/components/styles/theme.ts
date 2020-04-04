@@ -31,7 +31,7 @@ export const theme: DefaultTheme = {
   bp: {
     tablet: '580px',
     laptop: '760px',
-    desktop: '1000px',
+    desktop: '1100px',
   },
   time: {
     short: '0.1s',
