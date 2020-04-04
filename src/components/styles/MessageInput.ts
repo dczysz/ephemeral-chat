@@ -9,17 +9,8 @@ export const StyledMessageInput = styled.form<Props>`
   background-color: ${p => p.theme.colors.bgDark};
   box-shadow: 0 -2px 6px ${p => p.theme.colors.bgDarker};
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   padding: 1rem;
-
-  p {
-    margin: 0;
-  }
-
-  .name {
-    color: ${p => p.theme.colors.textMuted};
-    white-space: nowrap;
-  }
 
   .input {
     --time: ${p => p.theme.time.long};
@@ -29,10 +20,10 @@ export const StyledMessageInput = styled.form<Props>`
     border-radius: ${p => p.theme.br};
     box-shadow: ${p => p.theme.bs.raised};
     display: flex;
-    margin-left: 1rem;
+    max-width: ${p => p.theme.bp.laptop};
     position: relative;
-    width: 100%;
     transition: box-shadow ${p => p.theme.time.short};
+    width: 100%;
 
     :focus-within {
       box-shadow: ${p => p.theme.bs.raised}, ${p => p.theme.bs.inset};
@@ -54,6 +45,7 @@ export const StyledMessageInput = styled.form<Props>`
     .placeholder {
       color: ${p => p.theme.colors.textMuted};
       left: calc(1rem + 1px);
+      margin: 0;
       pointer-events: none;
       position: absolute;
       top: 50%;

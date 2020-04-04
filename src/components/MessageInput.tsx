@@ -7,14 +7,12 @@ interface Props {
   message: string;
   setMessage: (message: string) => void;
   sendMessage: (e?: React.FormEvent<HTMLFormElement>) => void;
-  name: string;
 }
 
 const MessageInput: React.FC<Props> = ({
   message,
   setMessage,
   sendMessage,
-  name,
 }) => {
   const inputRef = useRef<HTMLTextAreaElement>(null!);
 
@@ -42,8 +40,6 @@ const MessageInput: React.FC<Props> = ({
       onSubmit={handleSubmit}
       expand={message.indexOf('\n') >= 0}
     >
-      <p className="name">{name}</p>
-
       <div className="input">
         {!message.length && <p className="placeholder">type a message...</p>}
         <textarea
