@@ -27,15 +27,18 @@ const MessageInput: React.FC<Props> = ({
       onSubmit={sendMessage}
       expand={message.indexOf('\n') >= 0}
     >
-      <p>{name}</p>
+      <p className="name">{name}</p>
 
-      <textarea
-        placeholder="type a message..."
-        value={message}
-        onChange={e => setMessage(e.target.value)}
-        onKeyDown={handleKeyDown}
-        rows={Math.min(6, message.split('\n').length)}
-      />
+      <div className="input">
+        {!message.length && <p className="placeholder">type a message...</p>}
+        <textarea
+          value={message}
+          onChange={e => setMessage(e.target.value)}
+          onKeyDown={handleKeyDown}
+          rows={Math.min(6, message.split('\n').length)}
+        />
+        <button type="submit">Send</button>
+      </div>
     </StyledMessageInput>
   );
 };
