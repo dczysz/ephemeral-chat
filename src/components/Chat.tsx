@@ -97,8 +97,8 @@ const Chat: React.FC<RouteComponentProps<
     };
   }, [messages]);
 
-  const sendMessage = (e: React.FormEvent) => {
-    e.preventDefault();
+  const sendMessage = (e?: React.FormEvent) => {
+    e && e.preventDefault();
     if (socket) {
       if (message) {
         const _message = validateInput(message, MAX_MESSAGE_LENGTH);

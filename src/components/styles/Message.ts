@@ -29,7 +29,7 @@ export const StyledMessage = styled.div<Props>`
     padding: 1rem;
     word-break: break-word;
 
-    p {
+    pre {
       margin: 0;
     }
   }

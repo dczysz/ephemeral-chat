@@ -23,7 +23,7 @@ const Message: React.FC<Props> = ({ message: { user, text }, currentUser }) => {
         <p>{messageFromName}</p>
       </div>
       <div className="message-text">
-        <p>{text}</p>
+        <pre>{text}</pre>
       </div>
     </StyledMessage>
   );
