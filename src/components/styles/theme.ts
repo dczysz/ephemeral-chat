@@ -1,12 +1,12 @@
 import { DefaultTheme } from 'styled-components';
 
 const colors = {
-  bg: '#36393f',
-  bgDark: '#2f3136',
-  bgDarker: '#292b2f',
-  bgLight: '#40444b',
-  bsLight: '#282a2e',
-  bsDark: '#36383e',
+  bg: '#464a53',
+  bgDark: '#3b3e44',
+  bgDarker: '#2f3237',
+  bgLight: '#525760',
+  bsLight: '#44474e',
+  bsDark: '#32353a',
   danger: '#f04747',
   primary: '#7289da',
   success: '#43b581',
@@ -15,10 +15,10 @@ const colors = {
 };
 
 const bs = {
-  raised: `4px 4px 8px ${colors.bsLight}, 
-           -4px -4px 8px ${colors.bsDark}`,
-  inset: `inset 4px 4px 8px ${colors.bsLight}cc, 
-          inset -4px -4px 8px ${colors.bsDark}cc`,
+  raised: `4px 4px 8px ${colors.bsDark}, 
+           -4px -4px 8px ${colors.bsLight}`,
+  inset: `inset 4px 4px 8px ${colors.bsDark}cc, 
+          inset -4px -4px 8px ${colors.bsLight}cc`,
 };
 
 const gradients = {
