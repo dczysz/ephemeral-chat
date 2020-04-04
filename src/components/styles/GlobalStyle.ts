@@ -53,14 +53,5 @@ export const GlobalStyle = createGlobalStyle<Props>`
       color: ${p => p.theme.colors.textMuted};
       opacity: 1; /* Firefox lowers opacity */
     }
-  }
-
-
-  /* TODO focus styles */
-  button:focus {}
-
-  input:focus,
-  textarea:focus {
-    outline: none;
-  }
+  }  
 `;

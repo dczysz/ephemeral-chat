@@ -26,11 +26,15 @@ export const StyledInfoBar = styled.div`
     align-items: center;
     display: flex;
 
-    h2 {
-      margin: 0;
-
-      :hover {
+    a {
+      :hover,
+      :active,
+      :focus {
         color: ${p => p.theme.colors.textMuted};
+      }
+
+      h2 {
+        margin: 0;
       }
     }
 

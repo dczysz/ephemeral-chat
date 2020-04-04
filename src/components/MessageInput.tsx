@@ -37,7 +37,7 @@ const MessageInput: React.FC<Props> = ({
           onKeyDown={handleKeyDown}
           rows={Math.min(6, message.split('\n').length)}
         />
-        <button type="submit">Send</button>
+        <button type="submit">></button>
       </div>
     </StyledMessageInput>
   );

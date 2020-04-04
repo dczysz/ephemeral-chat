@@ -36,6 +36,16 @@ export const StyledMessageInput = styled.form<Props>`
 
     :focus-within {
       box-shadow: ${p => p.theme.bs.raised}, ${p => p.theme.bs.inset};
+
+      button[type='submit'] {
+        box-shadow: ${p => p.theme.bs.raised};
+
+        :hover,
+        :active,
+        :focus {
+          box-shadow: ${p => p.theme.bs.raised}, ${p => p.theme.bs.inset};
+        }
+      }
     }
 
     .placeholder {
@@ -62,13 +72,12 @@ export const StyledMessageInput = styled.form<Props>`
 
     button[type='submit'] {
       background-color: transparent;
-      border: none;
+      border: 2px solid transparent;
+      border-radius: 1000px;
       color: ${p => p.theme.colors.textMuted};
-      padding: 1rem;
-
-      :hover {
-        color: ${p => p.theme.colors.text};
-      }
+      width: 2rem;
+      height: 2rem;
+      margin: 0.5rem;
     }
   }
 `;

@@ -23,3 +23,22 @@ input,
 button {
   font-size: 0.8rem;
 }
+
+a,
+a:hover,
+a:active,
+a:focus,
+button,
+button:hover,
+button:active,
+button:focus,
+input,
+input:hover,
+input:active,
+input:focus,
+textarea,
+textarea:hover,
+textarea:active,
+textarea:focus {
+  outline: none;
+}
