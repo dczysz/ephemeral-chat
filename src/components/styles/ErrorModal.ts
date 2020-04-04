@@ -8,7 +8,7 @@ const animation = keyframes`
 export const StyledErrorModal = styled.div`
   align-items: center;
   animation: ${animation} ${p => p.theme.time.long};
-  background-color: ${p => p.theme.colors.bgDark}dd;
+  background-color: ${p => p.theme.colors.bgDarker};
   bottom: 0;
   display: flex;
   justify-content: center;
@@ -19,7 +19,7 @@ export const StyledErrorModal = styled.div`
   top: 0;
 
   > div {
-    background-color: ${p => p.theme.colors.bg};
+    background-color: ${p => p.theme.colors.bgDark};
     border-radius: ${p => p.theme.br};
     padding: 1rem;
 
