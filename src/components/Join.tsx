@@ -75,7 +75,7 @@ const Join: React.FC<RouteComponentProps<{}, StaticContext, HistoryState>> = ({
           </label>
 
           <Button type="submit" primary>
-            Join
+            join
           </Button>
         </form>
       </div>

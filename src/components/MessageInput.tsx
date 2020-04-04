@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import { StyledMessageInput } from './styles';
 
@@ -15,16 +15,30 @@ const MessageInput: React.FC<Props> = ({
   sendMessage,
   name,
 }) => {
+  const inputRef = useRef<HTMLTextAreaElement>(null!);
+
+  // Handle multiline input
+  // Normal Enter key on mobile adds line
+  // Shift + Enter if not on mobile adds line
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
+
+    if (e.key === 'Enter' && !e.shiftKey && !isMobile) {
       e.preventDefault();
       sendMessage();
     }
   };
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    sendMessage(e);
+    inputRef.current && inputRef.current.focus();
+  };
+
   return (
     <StyledMessageInput
-      onSubmit={sendMessage}
+      onSubmit={handleSubmit}
       expand={message.indexOf('\n') >= 0}
     >
       <p className="name">{name}</p>
@@ -36,6 +50,7 @@ const MessageInput: React.FC<Props> = ({
           onChange={e => setMessage(e.target.value)}
           onKeyDown={handleKeyDown}
           rows={Math.min(6, message.split('\n').length)}
+          ref={inputRef}
         />
         <button type="submit">></button>
       </div>
