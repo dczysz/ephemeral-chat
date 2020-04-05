@@ -8,6 +8,9 @@ interface Props {
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   placeholder?: string;
   maxLength?: number;
+  type?: string;
+  className?: string;
+  ref?: React.MutableRefObject<HTMLInputElement>;
 }
 
 const Input: React.FC<Props> = ({
@@ -16,11 +19,13 @@ const Input: React.FC<Props> = ({
   onKeyDown,
   placeholder,
   maxLength,
+  type = 'text',
 }) => {
   return (
     <>
       <StyledInput
-        type="text"
+        autoComplete="off"
+        type={type}
         value={value}
         onChange={onChange}
         onKeyDown={onKeyDown}

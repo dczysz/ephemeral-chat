@@ -63,6 +63,16 @@ export const StyledInfoBar = styled.div`
   }
 
   .right {
+    align-items: center;
+    display: flex;
+
+    > svg {
+      fill: ${p => p.theme.colors.textMuted};
+      height: 1.5rem;
+      margin-right: 0.5rem;
+      width: 1.5rem;
+    }
+
     button {
       margin-left: 1rem;
     }

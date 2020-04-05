@@ -15,9 +15,11 @@ import InfoBar from './InfoBar';
 import MessageInput from './MessageInput';
 import Messages from './Messages';
 import Sidebar from './Sidebar';
-import ErrorModal from './ErrorModal';
+import Modal from './Modal';
 import useClickOutside from '../hooks/useClickOutside';
 import { validateInput } from '../util';
+import Button from './Button';
+import Input from './Input';
 
 let socket: SocketIOClient.Socket;
 
@@ -30,6 +32,11 @@ interface HistoryState {
   name?: string;
 }
 
+type ErrorType = {
+  msg: string;
+  type: string;
+};
+
 const Chat: React.FC<RouteComponentProps<
   MatchParams,
   StaticContext,
@@ -37,11 +44,13 @@ const Chat: React.FC<RouteComponentProps<
 >> = ({ history, match }) => {
   const [user, setUser] = useState<UserType>({ name: '', room: '' });
   const [users, setUsers] = useState<UserType[]>([]);
-  const [roomLeader, setRoomLeader] = useState<UserType>(null!);
+  const [roomLeader, setRoomLeader] = useState<UserType | null>(null);
+  const [privateRoom, setPrivateRoom] = useState(false);
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState<MessageType[]>([]);
   const [showSidebar, setShowSidebar] = useState(false);
-  const [errorStr, setErrorStr] = useState<string | null>(null);
+  const [error, setError] = useState<ErrorType | null>(null);
+  const [roomPassword, setRoomPassword] = useState('');
   const sidebarRef = useRef(null!);
 
   useClickOutside(sidebarRef, () =>
@@ -50,12 +59,6 @@ const Chat: React.FC<RouteComponentProps<
 
   // Connect socket to server
   useEffect(() => {
-    const { room } = match.params;
-    let name =
-      history.location.state && history.location.state.name
-        ? history.location.state.name
-        : '';
-
     // Fix back button not closing socket
     //TODO: Still not actually disconnecting
     if (socket) {
@@ -66,12 +69,22 @@ const Chat: React.FC<RouteComponentProps<
 
     socket = io(ENDPOINT);
 
+    const { room } = match.params;
+    let name =
+      history.location.state && history.location.state.name
+        ? history.location.state.name
+        : '';
+
     socket.emit(
       'join',
       { name, room },
       ({ user, error }: JoinRoomResponseType) => {
-        if (error) setErrorStr(error);
-        if (user) setUser(user);
+        if (error) {
+          setError(error);
+        } else if (user) {
+          setUser(user);
+          setError(null);
+        }
       }
     );
 
@@ -86,11 +99,10 @@ const Chat: React.FC<RouteComponentProps<
       setMessages([...messages, message]);
     });
 
-    socket.on('roomData', ({ users, leader }: RoomDataType) => {
-      console.log('Chat roomdata', leader);
-
+    socket.on('roomData', ({ users, leader, isPrivate }: RoomDataType) => {
       setUsers(users);
       setRoomLeader(leader);
+      setPrivateRoom(isPrivate);
     });
 
     return () => {
@@ -115,12 +127,37 @@ const Chat: React.FC<RouteComponentProps<
         }
 
         socket.emit('sendMessage', _message, (error: string) => {
-          error ? setErrorStr(error) : setMessage('');
+          error ? setError({ msg: error, type: 'fatal' }) : setMessage('');
         });
       }
     } else {
-      setErrorStr('Connection to server lost');
+      setError({ msg: 'Connection to server lost', type: 'fatal' });
     }
+  };
+
+  const joinRoom = (e?: React.FormEvent) => {
+    e && e.preventDefault();
+
+    if (!roomPassword.length) return;
+
+    const { room } = match.params;
+    let name =
+      history.location.state && history.location.state.name
+        ? history.location.state.name
+        : '';
+
+    socket.emit(
+      'join',
+      { name, room, pass: roomPassword },
+      ({ user, error }: JoinRoomResponseType) => {
+        if (error) {
+          setError(error);
+        } else if (user) {
+          setUser(user);
+          setError(null);
+        }
+      }
+    );
   };
 
   const exitToHome = () => {
@@ -129,22 +166,58 @@ const Chat: React.FC<RouteComponentProps<
     socket.off('roomData');
     socket.emit('disconnect');
     socket.close();
-    history.push('/', { error: errorStr || 'Unknown error' });
+    history.push('/', { error: error ? error.msg : 'Unknown error' });
   };
 
   return (
     <StyeldChat showSidebar={showSidebar}>
-      {errorStr ? (
-        <ErrorModal error={errorStr} onClick={exitToHome} />
-      ) : (
+      {error ? (
+        <Modal heading={error.type === 'password' ? 'private room' : 'uh oh!'}>
+          <p>{error.msg}</p>
+          <form className="error-modal" onSubmit={joinRoom}>
+            {error.type === 'password' ? (
+              <>
+                <Input
+                  type="password"
+                  value={roomPassword}
+                  onChange={e => setRoomPassword(e.target.value)}
+                  placeholder="room password"
+                />
+                <div className="buttons">
+                  <Button onClick={exitToHome}>go home</Button>
+                  <Button primary={roomPassword.length > 0} type="submit">
+                    submit
+                  </Button>
+                </div>
+              </>
+            ) : (
+              <div className="buttons">
+                <Button
+                  type={error.type === 'fatal' ? 'submit' : 'button'}
+                  onClick={exitToHome}
+                >
+                  go home
+                </Button>
+              </div>
+            )}
+          </form>
+        </Modal>
+      ) : user.id ? (
         <>
           <div className="sidebar" ref={sidebarRef}>
-            <Sidebar users={users} currentUser={user} roomLeader={roomLeader} />
+            <Sidebar
+              users={users}
+              currentUser={user}
+              roomLeader={roomLeader}
+              socket={socket}
+              isPrivate={privateRoom}
+            />
           </div>
           <div className="nav">
             <InfoBar
               room={user.room}
               showSidebar={() => setShowSidebar(true)}
+              isPrivate={privateRoom}
             />
           </div>
           <div className="messages">
@@ -158,7 +231,7 @@ const Chat: React.FC<RouteComponentProps<
             />
           </div>
         </>
-      )}
+      ) : null}
     </StyeldChat>
   );
 };

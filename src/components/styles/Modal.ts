@@ -5,27 +5,36 @@ const animation = keyframes`
   to { opacity: 1;}
 `;
 
-export const StyledErrorModal = styled.div`
-  align-items: center;
+export const StyledModal = styled.div`
+  align-items: flex-start;
   animation: ${animation} ${p => p.theme.time.long};
-  background-color: ${p => p.theme.colors.bgDarker};
+  background-color: ${p => p.theme.colors.bgDarker}cc;
   bottom: 0;
   display: flex;
   justify-content: center;
   left: 0;
+  padding: 1rem;
   pointer-events: all;
   position: absolute;
   right: 0;
   top: 0;
 
-  > div {
+  .modal {
     background-color: ${p => p.theme.colors.bgDark};
     border-radius: ${p => p.theme.br};
-    padding: 1rem;
+    color: ${p => p.theme.colors.text};
+    margin-top: 1rem;
+    max-width: ${p => p.theme.bp.tablet};
+    padding: 1.5rem;
+    width: 100%;
 
     h1 {
       margin-top: 0;
       text-align: center;
     }
+  }
+
+  @media screen and (min-width: ${p => p.theme.bp.laptop}) {
+    align-items: center;
   }
 `;

@@ -6,6 +6,7 @@ import { MAX_NAME_LENGTH, MAX_ROOM_LENGTH } from '../store/socket';
 import { validateInput } from '../util';
 import Input from './Input';
 import Button from './Button';
+import Modal from './Modal';
 
 const defaultVals = {
   name: 'anonymous',
@@ -52,8 +53,7 @@ const Join: React.FC<RouteComponentProps<{}, StaticContext, HistoryState>> = ({
 
   return (
     <StyledJoin>
-      <div className="modal">
-        <h1>join</h1>
+      <Modal heading="join">
         <form onSubmit={handleSubmit}>
           <label>
             <span>name</span>
@@ -78,7 +78,7 @@ const Join: React.FC<RouteComponentProps<{}, StaticContext, HistoryState>> = ({
             join
           </Button>
         </form>
-      </div>
+      </Modal>
     </StyledJoin>
   );
 };

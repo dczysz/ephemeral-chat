@@ -1,7 +1,6 @@
 export * from './theme';
 export * from './Button';
 export * from './Chat';
-export * from './ErrorModal';
 export * from './GlobalStyle';
 export * from './InfoBar';
 export * from './Input';
@@ -10,5 +9,6 @@ export * from './LeaderOptions';
 export * from './Message';
 export * from './MessageInput';
 export * from './Messages';
+export * from './Modal';
 export * from './Sidebar';
 export * from './UserList';

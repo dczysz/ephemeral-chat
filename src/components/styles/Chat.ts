@@ -43,6 +43,21 @@ export const StyeldChat = styled.div<Props>`
     z-index: 1;
   }
 
+  form.error-modal {
+    input {
+      margin-bottom: 1rem;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: flex-end;
+
+      button {
+        margin-left: 1rem;
+      }
+    }
+  }
+
   @media (min-width: ${p => p.theme.bp.laptop}) {
     grid-template-areas:
       'nav nav'

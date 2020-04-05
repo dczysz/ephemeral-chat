@@ -7,4 +7,20 @@ export const StyledLeaderOptions = styled.div`
   .heading {
     margin: 0;
   }
+
+  form {
+    align-items: center;
+    display: flex;
+    margin-top: 1rem;
+
+    &.collapsed {
+      button {
+        width: 100%;
+      }
+    }
+  }
+
+  input[type='password'] {
+    margin-right: 1rem;
+  }
 `;

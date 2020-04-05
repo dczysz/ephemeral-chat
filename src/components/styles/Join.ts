@@ -1,58 +1,30 @@
 import styled from 'styled-components';
 
 export const StyledJoin = styled.div`
-  align-items: top;
-  background-color: ${p => p.theme.colors.bgDarker};
-  display: flex;
   height: 100vh;
-  justify-content: center;
-  color: ${p => p.theme.colors.text};
-  padding: 1rem;
 
-  .modal {
-    background-color: ${p => p.theme.colors.bgDark};
-    border-radius: ${p => p.theme.br};
-    margin-bottom: auto;
-    max-width: ${p => p.theme.bp.tablet};
-    padding: 1.5rem;
-    width: 100%;
+  form {
+    display: flex;
+    flex-direction: column;
 
-    h1 {
-      margin-top: 0;
-      text-align: center;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-
-      label {
-        span {
-          color: ${p => p.theme.colors.textMuted};
-          display: inline-block;
-          margin: 0 0 0.5rem 0.5rem;
-        }
-
-        input {
-          margin-bottom: 1rem;
-
-          ::placeholder {
-            color: ${p => p.theme.colors.text};
-          }
-        }
+    label {
+      span {
+        color: ${p => p.theme.colors.textMuted};
+        display: inline-block;
+        margin: 0 0 0.5rem 0.5rem;
       }
 
-      button {
-        margin-left: auto;
+      input {
+        margin-bottom: 1rem;
+
+        ::placeholder {
+          color: ${p => p.theme.colors.text};
+        }
       }
     }
-  }
 
-  @media screen and (min-width: ${p => p.theme.bp.laptop}) {
-    align-items: center;
-
-    .modal {
-      margin: 0;
+    button {
+      margin-left: auto;
     }
   }
 `;

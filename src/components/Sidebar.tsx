@@ -8,13 +8,28 @@ import { UserType } from '../store/socket';
 interface Props {
   users: UserType[];
   currentUser: UserType;
-  roomLeader: UserType;
+  roomLeader: UserType | null;
+  socket: SocketIOClient.Socket;
+  isPrivate: boolean;
 }
 
-const Sidebar: React.FC<Props> = ({ users, currentUser, roomLeader }) => {
+const Sidebar: React.FC<Props> = ({
+  users,
+  currentUser,
+  roomLeader,
+  socket,
+  isPrivate,
+}) => {
   return (
     <StyledSidebar>
-      <LeaderOptions user={currentUser} roomLeader={roomLeader} />
+      {roomLeader && (
+        <LeaderOptions
+          user={currentUser}
+          roomLeader={roomLeader}
+          socket={socket}
+          isPrivate={isPrivate}
+        />
+      )}
 
       <UserList users={users} currentUser={currentUser} />
     </StyledSidebar>

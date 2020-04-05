@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { TiThMenu } from 'react-icons/ti';
+import { TiThMenu as MenuIcon } from 'react-icons/ti';
+import { AiFillEyeInvisible as PrivateIcon } from 'react-icons/ai';
 
 import { StyledInfoBar } from './styles';
 import Button from './Button';
@@ -8,9 +9,10 @@ import Button from './Button';
 interface Props {
   room: string;
   showSidebar: () => void;
+  isPrivate: boolean;
 }
 
-const InfoBar: React.FC<Props> = ({ room, showSidebar }) => (
+const InfoBar: React.FC<Props> = ({ room, showSidebar, isPrivate }) => (
   <StyledInfoBar>
     <div className="container">
       <div className="left">
@@ -23,13 +25,14 @@ const InfoBar: React.FC<Props> = ({ room, showSidebar }) => (
         <h3>{room}</h3>
       </div>
       <div className="right">
+        {isPrivate && <PrivateIcon title="private room" />}
         <Button
           type="button"
           icon
           onClick={showSidebar}
           className="tablet-only"
         >
-          <TiThMenu />
+          <MenuIcon />
         </Button>
       </div>
     </div>

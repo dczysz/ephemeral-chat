@@ -6,6 +6,7 @@ export interface StyledButtonProps {
   onClick?: () => void;
   primary?: boolean;
   type?: 'button' | 'submit' | 'reset';
+  style?: any;
 }
 
 export const StyledButton = styled.button<StyledButtonProps>`
@@ -13,14 +14,15 @@ export const StyledButton = styled.button<StyledButtonProps>`
   border: 2px solid ${p => p.theme.colors.bgDark};
   border-radius: ${p => p.theme.br};
   box-shadow: ${p => p.theme.bs.raised};
-  color: ${p => (p.primary ? p.theme.colors.primary : p.theme.colors.text)};
+  color: ${p =>
+    p.primary ? p.theme.colors.primary : p.theme.colors.textMuted};
   cursor: pointer;
   font-weight: bold;
   padding: 1em;
 
   &.icon {
     align-items: center;
-    color: ${p => p.theme.colors.textMuted};
+    fill: currentColor;
     display: flex;
     justify-content: center;
     padding: 0;

@@ -16,13 +16,17 @@ export type UserType = {
 
 export type JoinRoomResponseType = {
   user?: UserType;
-  error?: string;
+  error?: {
+    msg: string;
+    type: 'fatal' | 'password';
+  };
 };
 
 export type RoomDataType = {
   room: string;
   users: UserType[];
-  leader: UserType;
+  leader: UserType | null;
+  isPrivate: boolean;
 };
 
 export type MessageType = {
