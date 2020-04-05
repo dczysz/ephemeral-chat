@@ -22,6 +22,7 @@ export type JoinRoomResponseType = {
 export type RoomDataType = {
   room: string;
   users: UserType[];
+  leader: UserType;
 };
 
 export type MessageType = {

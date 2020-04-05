@@ -16,7 +16,6 @@ import MessageInput from './MessageInput';
 import Messages from './Messages';
 import Sidebar from './Sidebar';
 import ErrorModal from './ErrorModal';
-import UserList from './UserList';
 import useClickOutside from '../hooks/useClickOutside';
 import { validateInput } from '../util';
 
@@ -38,6 +37,7 @@ const Chat: React.FC<RouteComponentProps<
 >> = ({ history, match }) => {
   const [user, setUser] = useState<UserType>({ name: '', room: '' });
   const [users, setUsers] = useState<UserType[]>([]);
+  const [roomLeader, setRoomLeader] = useState<UserType>(null!);
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState<MessageType[]>([]);
   const [showSidebar, setShowSidebar] = useState(false);
@@ -86,8 +86,11 @@ const Chat: React.FC<RouteComponentProps<
       setMessages([...messages, message]);
     });
 
-    socket.on('roomData', ({ users }: RoomDataType) => {
+    socket.on('roomData', ({ users, leader }: RoomDataType) => {
+      console.log('Chat roomdata', leader);
+
       setUsers(users);
+      setRoomLeader(leader);
     });
 
     return () => {
@@ -136,9 +139,7 @@ const Chat: React.FC<RouteComponentProps<
       ) : (
         <>
           <div className="sidebar" ref={sidebarRef}>
-            <Sidebar>
-              <UserList users={users} currentUser={user} />
-            </Sidebar>
+            <Sidebar users={users} currentUser={user} roomLeader={roomLeader} />
           </div>
           <div className="nav">
             <InfoBar
