@@ -30,7 +30,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
   display: flex;
   font-weight: bold;
   height: 3rem;
-  padding: 1rem;
+  padding: 1rem 1.25rem;
   justify-content: center;
 
   &.icon {
