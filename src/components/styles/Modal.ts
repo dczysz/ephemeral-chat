@@ -8,7 +8,7 @@ const animation = keyframes`
 export const StyledModal = styled.div`
   align-items: flex-start;
   animation: ${animation} ${p => p.theme.time.long};
-  background-color: ${p => p.theme.colors.bgDarker}cc;
+  background-color: ${p => p.theme.colors.bgDarker};
   bottom: 0;
   display: flex;
   justify-content: center;
