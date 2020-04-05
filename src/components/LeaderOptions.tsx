@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { MdSend as SendIcon } from 'react-icons/md';
 import { AiOutlineCloseCircle as CloseIcon } from 'react-icons/ai';
 
@@ -24,7 +24,6 @@ const LeaderOptions: React.FC<Props> = ({
 }) => {
   const [passStatus, setPassStatus] = useState<PassStatus>('collapsed');
   const [newRoomPass, setNewRoomPass] = useState('');
-  const passInputRef = useRef<HTMLInputElement>(null!);
   const isLeader = user.num === roomLeader.num;
 
   const emitSetRoomPass = (newPass: string) => {
@@ -67,24 +66,29 @@ const LeaderOptions: React.FC<Props> = ({
           onSubmit={handlePasswordFormSubmit}
           className={passStatus === 'collapsed' ? 'collapsed' : ''}
         >
-          {passStatus !== 'collapsed' && (
-            <Input
-              value={newRoomPass}
-              onChange={e => setNewRoomPass(e.target.value)}
-              placeholder="room password"
-              type="password"
-              aria-label="room password"
-              ref={passInputRef}
-              bg="darker"
-            />
-          )}
-          <Button
-            icon={passStatus !== 'collapsed'}
-            primary={newRoomPass.length > 0}
-            type="submit"
-            aria-label="Set room password"
-            className="set-pass"
+          <Input
+            value={newRoomPass}
+            onChange={e => setNewRoomPass(e.target.value)}
+            placeholder="room password"
+            type="password"
+            aria-label="room password"
+            aria-hidden={passStatus === 'collapsed'}
             bg="darker"
+            className={passStatus === 'collapsed' ? 'hidden' : ''}
+          />
+
+          <Button
+            type="submit"
+            bg="darker"
+            icon={passStatus !== 'collapsed'}
+            primary={passStatus !== 'collapsed' && newRoomPass.length > 0}
+            aria-label={
+              passStatus !== 'collapsed'
+                ? newRoomPass.length > 0
+                  ? 'set password'
+                  : 'never mind'
+                : null
+            }
           >
             {passStatus === 'collapsed' ? (
               isPrivate ? (

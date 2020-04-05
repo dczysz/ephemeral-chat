@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export interface StyledInputProps {
   bg?: 'dark' | 'darker';
   type?: 'text' | 'password';
+  className?: string;
 }
 
 export const StyledInput = styled.input<StyledInputProps>`

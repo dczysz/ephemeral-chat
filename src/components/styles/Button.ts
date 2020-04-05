@@ -9,6 +9,7 @@ export interface StyledButtonProps {
   style?: any;
   bg?: 'dark' | 'darker';
   disabled?: boolean;
+  ref?: React.MutableRefObject<HTMLButtonElement>;
 }
 
 export const StyledButton = styled.button<StyledButtonProps>`
