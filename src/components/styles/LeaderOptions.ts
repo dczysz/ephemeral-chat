@@ -6,6 +6,8 @@ export const StyledLeaderOptions = styled.div`
 
   .heading {
     margin: 0;
+    margin-bottom: 1.5rem;
+    text-align: center;
   }
 
   form {
