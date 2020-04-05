@@ -24,7 +24,9 @@ export const StyledMessage = styled.div<Props>`
   }
   .message-text {
     background-color: var(--bg);
-    border-radius: 0.5rem;
+    border-radius: ${p => p.theme.br};
+    box-shadow: ${p =>
+      p.theme.bs.grooved[p.fromCurrentUser ? 'primary' : 'light']};
     max-width: 100%;
     padding: 1rem;
 

@@ -20,21 +20,27 @@ const colors = {
   primary: '#7289da',
   success: '#43b581',
   text: '#dcddde',
-  textMuted: '#72767d',
+  textMuted: '#878b92',
 };
 
 const bs = {
   raised: {
     dark: `4px 4px 8px ${bsColors.dark.dark}, 
-    -4px -4px 8px ${bsColors.dark.light}`,
+          -4px -4px 8px ${bsColors.dark.light}`,
     darker: `4px 4px 8px ${bsColors.darker.dark}, 
-    -4px -4px 8px ${bsColors.darker.light}`,
+            -4px -4px 8px ${bsColors.darker.light}`,
   },
   inset: {
     dark: `inset 4px 4px 8px ${bsColors.dark.dark}cc, 
-          inset -4px -4px 8px ${bsColors.dark.light}cc`,
+           inset -4px -4px 8px ${bsColors.dark.light}cc`,
     darker: `inset 4px 4px 8px ${bsColors.darker.dark}cc, 
-    inset -4px -4px 8px ${bsColors.darker.light}cc`,
+             inset -4px -4px 8px ${bsColors.darker.light}cc`,
+  },
+  grooved: {
+    light: `inset 0 0 0 1px ${colors.bgLight},
+            inset 0 0 0 2px ${colors.bgDark}66`,
+    primary: `inset 0 0 0 1px ${colors.primary},
+              inset 0 0 0 2px ${colors.bg}66`,
   },
 };
 

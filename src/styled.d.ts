@@ -28,14 +28,14 @@ declare module 'styled-components' {
         dark: string;
         darker: string;
       };
+      grooved: {
+        light: string;
+        primary: string;
+      };
     };
     time: {
       short: string;
       long: string;
     };
-    // gradients: {
-    //   concave: string;
-    //   convex: string;
-    // };
   }
 }
