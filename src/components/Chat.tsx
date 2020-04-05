@@ -51,6 +51,7 @@ const Chat: React.FC<RouteComponentProps<
   const [showSidebar, setShowSidebar] = useState(false);
   const [error, setError] = useState<ErrorType | null>(null);
   const [roomPassword, setRoomPassword] = useState('');
+  const [loading, setLoading] = useState(true);
   const sidebarRef = useRef(null!);
 
   useClickOutside(sidebarRef, () =>
@@ -75,6 +76,8 @@ const Chat: React.FC<RouteComponentProps<
         ? history.location.state.name
         : '';
 
+    setLoading(true);
+
     socket.emit(
       'join',
       { name, room },
@@ -85,6 +88,7 @@ const Chat: React.FC<RouteComponentProps<
           setUser(user);
           setError(null);
         }
+        setLoading(false);
       }
     );
 
@@ -146,6 +150,8 @@ const Chat: React.FC<RouteComponentProps<
         ? history.location.state.name
         : '';
 
+    setLoading(true);
+
     socket.emit(
       'join',
       { name, room, pass: roomPassword },
@@ -156,6 +162,7 @@ const Chat: React.FC<RouteComponentProps<
           setUser(user);
           setError(null);
         }
+        setLoading(false);
       }
     );
   };
@@ -206,8 +213,11 @@ const Chat: React.FC<RouteComponentProps<
             )}
           </form>
         </Modal>
-      ) : user.id ? (
+      ) : (
         <>
+          <div className="messages">
+            <Messages messages={messages} currentUser={user} />
+          </div>
           <div className="sidebar" ref={sidebarRef}>
             <Sidebar
               users={users}
@@ -224,9 +234,6 @@ const Chat: React.FC<RouteComponentProps<
               isPrivate={privateRoom}
             />
           </div>
-          <div className="messages">
-            <Messages messages={messages} currentUser={user} />
-          </div>
           <div className="input">
             <MessageInput
               message={message}
@@ -234,8 +241,14 @@ const Chat: React.FC<RouteComponentProps<
               sendMessage={sendMessage}
             />
           </div>
+          <div className={['loading-overlay', loading ? 'show' : ''].join(' ')}>
+            <div>
+              <h1 className="glow">loading...</h1>
+              <h2 className="delay">server is waking up, one moment</h2>
+            </div>
+          </div>
         </>
-      ) : null}
+      )}
     </StyeldChat>
   );
 };
