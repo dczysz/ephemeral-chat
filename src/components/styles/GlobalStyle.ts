@@ -13,14 +13,6 @@ export const GlobalStyle = createGlobalStyle<Props>`
       background-color ${p => p.theme.time.short};
   }
 
-  html,
-  body {
-    @media screen and (max-width: ${p => p.theme.bp.tablet}) {
-      font-size: 95%;
-    }
-
-  }
-
   body {
     background-color: ${p => p.theme.colors.bg};
 
