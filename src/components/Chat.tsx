@@ -185,7 +185,11 @@ const Chat: React.FC<RouteComponentProps<
                 />
                 <div className="buttons">
                   <Button onClick={exitToHome}>go home</Button>
-                  <Button primary={roomPassword.length > 0} type="submit">
+                  <Button
+                    primary
+                    disabled={roomPassword.length < 1}
+                    type="submit"
+                  >
                     submit
                   </Button>
                 </div>

@@ -17,34 +17,28 @@ export const StyledMessageInput = styled.form<Props>`
     align-items: ${p => (p.expand ? 'flex-end' : 'center')};
     background-color: transparent;
     border: 2px solid transparent;
-    border-radius: ${p => p.theme.br};
-    box-shadow: ${p => p.theme.bs.raised};
+    border-radius: 1.7rem;
+    box-shadow: ${p => p.theme.bs.raised.dark};
     display: flex;
     max-width: ${p => p.theme.bp.laptop};
+    padding-left: 0.5rem;
     position: relative;
     transition: box-shadow ${p => p.theme.time.short};
     width: 100%;
 
     :focus-within {
-      box-shadow: ${p => p.theme.bs.raised}, ${p => p.theme.bs.inset};
+      box-shadow: ${p => p.theme.bs.raised.dark}, ${p => p.theme.bs.inset.dark};
+    }
 
-      button[type='submit'] {
-        box-shadow: ${p => p.theme.bs.raised};
-        color: ${p => p.theme.colors.textMuted};
-        pointer-events: all;
-        transition: box-shadow var(--time), color var(--time);
-
-        :hover,
-        :active,
-        :focus {
-          box-shadow: ${p => p.theme.bs.raised}, ${p => p.theme.bs.inset};
-        }
+    :not(:focus-within) {
+      button {
+        box-shadow: none;
       }
     }
 
     .placeholder {
       color: ${p => p.theme.colors.textMuted};
-      left: calc(1rem + 1px);
+      left: calc(1.5rem + 1px);
       margin: 0;
       pointer-events: none;
       position: absolute;
@@ -65,27 +59,11 @@ export const StyledMessageInput = styled.form<Props>`
       width: 100%;
     }
 
-    button[type='submit'] {
-      align-items: center;
-      background-color: transparent;
-      border: 2px solid transparent;
-      border-radius: 1000px;
-      color: transparent;
-      cursor: pointer;
-      display: flex;
-      height: 2rem;
-      justify-content: center;
-      margin-bottom: ${p => (p.expand ? '0.5rem' : 0)};
-      margin-right: 0.5rem;
-      padding: 0;
-      pointer-events: none;
-      transition: box-shadow var(--time), color var(--time);
-      width: 2rem;
-
-      svg {
-        height: 0.9rem;
-        width: 0.9rem;
-      }
+    button {
+      height: 2.5rem;
+      margin-right: 0.35rem;
+      margin-bottom: ${p => (p.expand ? '0.35rem' : '')};
+      width: 2.5rem;
     }
   }
 `;

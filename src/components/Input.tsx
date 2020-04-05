@@ -1,16 +1,15 @@
 import React from 'react';
 
-import { StyledInput } from './styles';
+import { StyledInput, StyledInputProps } from './styles';
 
-interface Props {
+interface Props extends StyledInputProps {
   value: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   placeholder?: string;
   maxLength?: number;
-  type?: string;
-  className?: string;
   ref?: React.MutableRefObject<HTMLInputElement>;
+  type?: 'text' | 'password';
 }
 
 const Input: React.FC<Props> = ({
@@ -20,6 +19,7 @@ const Input: React.FC<Props> = ({
   placeholder,
   maxLength,
   type = 'text',
+  ...rest
 }) => {
   return (
     <>
@@ -31,6 +31,7 @@ const Input: React.FC<Props> = ({
         onKeyDown={onKeyDown}
         placeholder={placeholder || ''}
         maxLength={maxLength || 30000}
+        {...rest}
       />
     </>
   );

@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { MdSend } from 'react-icons/md';
 
 import { StyledMessageInput } from './styles';
+import Button from './Button';
 
 interface Props {
   message: string;
@@ -49,9 +50,15 @@ const MessageInput: React.FC<Props> = ({
           rows={Math.min(6, message.split('\n').length)}
           ref={inputRef}
         />
-        <button type="submit" aria-label="Send Message">
+        <Button
+          type="submit"
+          primary
+          disabled={message.length < 1}
+          aria-label="send message"
+          icon
+        >
           <MdSend />
-        </button>
+        </Button>
       </div>
     </StyledMessageInput>
   );

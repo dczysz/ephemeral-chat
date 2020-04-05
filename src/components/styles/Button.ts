@@ -7,36 +7,49 @@ export interface StyledButtonProps {
   primary?: boolean;
   type?: 'button' | 'submit' | 'reset';
   style?: any;
+  bg?: 'dark' | 'darker';
+  disabled?: boolean;
 }
 
 export const StyledButton = styled.button<StyledButtonProps>`
-  background-color: transparent;
-  border: 2px solid ${p => p.theme.colors.bgDark};
-  border-radius: ${p => p.theme.br};
-  box-shadow: ${p => p.theme.bs.raised};
+  --bg: ${p =>
+    p.bg && p.bg === 'dark'
+      ? p.theme.colors.bgDark
+      : p.bg && p.bg === 'darker'
+      ? p.theme.colors.bgDarker
+      : 'transparent'};
+  background-color: var(--bg);
+  border: 2px solid var(--bg);
+  border-radius: 1000px;
+  box-shadow: ${p => p.theme.bs.raised[p.bg ? p.bg : 'dark']};
   color: ${p =>
-    p.primary ? p.theme.colors.primary : p.theme.colors.textMuted};
-  cursor: pointer;
+    p.primary && !p.disabled
+      ? p.theme.colors.primary
+      : p.theme.colors.textMuted};
+  align-items: center;
+  display: flex;
   font-weight: bold;
-  padding: 1em;
+  height: 3rem;
+  padding: 1rem;
+  justify-content: center;
 
   &.icon {
-    align-items: center;
     fill: currentColor;
-    display: flex;
-    justify-content: center;
-    padding: 0;
+    padding: 0.5rem;
 
     svg {
-      height: 1rem;
-      margin: 1em;
-      width: 1rem;
+      height: 100%;
+      width: auto;
     }
   }
 
   :hover,
   :focus,
   :active {
-    box-shadow: ${p => p.theme.bs.raised}, ${p => p.theme.bs.inset};
+    &:not(:disabled) {
+      box-shadow: ${p => p.theme.bs.raised[p.bg ? p.bg : 'dark']},
+        ${p => p.theme.bs.inset[p.bg ? p.bg : 'dark']};
+      cursor: pointer;
+    }
   }
 `;

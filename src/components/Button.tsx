@@ -16,7 +16,7 @@ const Button: React.FC<Props> = ({
   const classes = className + (icon ? ' icon' : '');
 
   return (
-    <StyledButton type={type} {...rest} className={classes}>
+    <StyledButton type={type} className={classes} {...rest}>
       {children}
     </StyledButton>
   );

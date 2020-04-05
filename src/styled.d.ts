@@ -8,8 +8,6 @@ declare module 'styled-components' {
       bgDark: string;
       bgDarker: string;
       bgLight: string;
-      bsDark: string;
-      bsLight: string;
       danger: string;
       primary: string;
       success: string;
@@ -22,16 +20,22 @@ declare module 'styled-components' {
       desktop: string;
     };
     bs: {
-      raised: string;
-      inset: string;
+      raised: {
+        dark: string;
+        darker: string;
+      };
+      inset: {
+        dark: string;
+        darker: string;
+      };
     };
     time: {
       short: string;
       long: string;
     };
-    gradients: {
-      concave: string;
-      convex: string;
-    };
+    // gradients: {
+    //   concave: string;
+    //   convex: string;
+    // };
   }
 }

@@ -75,6 +75,7 @@ const LeaderOptions: React.FC<Props> = ({
               type="password"
               aria-label="room password"
               ref={passInputRef}
+              bg="darker"
             />
           )}
           <Button
@@ -83,6 +84,7 @@ const LeaderOptions: React.FC<Props> = ({
             type="submit"
             aria-label="Set room password"
             className="set-pass"
+            bg="darker"
           >
             {passStatus === 'collapsed' ? (
               isPrivate ? (

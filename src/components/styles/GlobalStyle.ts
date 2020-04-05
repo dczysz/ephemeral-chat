@@ -44,6 +44,7 @@ export const GlobalStyle = createGlobalStyle<Props>`
   }
 
   input[type="text"],
+  input[type="password"],
   button {
     transition: box-shadow ${p => p.theme.time.short}
   }

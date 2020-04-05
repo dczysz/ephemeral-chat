@@ -1,12 +1,21 @@
 import { DefaultTheme } from 'styled-components';
 
+const bsColors = {
+  dark: {
+    dark: '#2a2d31',
+    light: '#4c4f57',
+  },
+  darker: {
+    dark: '#222428',
+    light: '#3c4046',
+  },
+};
+
 const colors = {
   bg: '#464a53',
   bgDark: '#3b3e44',
   bgDarker: '#2f3237',
   bgLight: '#525760',
-  bsLight: '#44474e',
-  bsDark: '#32353a',
   danger: '#f04747',
   primary: '#7289da',
   success: '#43b581',
@@ -15,15 +24,18 @@ const colors = {
 };
 
 const bs = {
-  raised: `4px 4px 8px ${colors.bsDark}, 
-           -4px -4px 8px ${colors.bsLight}`,
-  inset: `inset 4px 4px 8px ${colors.bsDark}cc, 
-          inset -4px -4px 8px ${colors.bsLight}cc`,
-};
-
-const gradients = {
-  concave: `linear-gradient(145deg, ${colors.bsLight}, ${colors.bsDark})`,
-  convex: `linear-gradient(145deg, ${colors.bsDark}, ${colors.bsLight})`,
+  raised: {
+    dark: `4px 4px 8px ${bsColors.dark.dark}, 
+    -4px -4px 8px ${bsColors.dark.light}`,
+    darker: `4px 4px 8px ${bsColors.darker.dark}, 
+    -4px -4px 8px ${bsColors.darker.light}`,
+  },
+  inset: {
+    dark: `inset 4px 4px 8px ${bsColors.dark.dark}cc, 
+          inset -4px -4px 8px ${bsColors.dark.light}cc`,
+    darker: `inset 4px 4px 8px ${bsColors.darker.dark}cc, 
+    inset -4px -4px 8px ${bsColors.darker.light}cc`,
+  },
 };
 
 export const theme: DefaultTheme = {
@@ -39,5 +51,4 @@ export const theme: DefaultTheme = {
   },
   bs,
   colors,
-  gradients,
 };
