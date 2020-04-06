@@ -11,6 +11,7 @@ interface Props {
 const UserList: React.FC<Props> = ({ users, currentUser }) => {
   return (
     <StyledUserList>
+      <h3>users</h3>
       <ul>
         {users.map(usr => (
           <li

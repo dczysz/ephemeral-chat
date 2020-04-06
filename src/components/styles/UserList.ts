@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 
 export const StyledUserList = styled.div`
+  padding: 1rem;
+
+  h3 {
+    margin: 0;
+  }
+
   ul {
     color: ${p => p.theme.colors.textMuted};
     list-style-type: none;
@@ -11,7 +17,7 @@ export const StyledUserList = styled.div`
       align-items: center;
       display: flex;
       margin: 0;
-      padding: 1rem;
+      padding: 1rem 0;
 
       &.current-user {
         color: ${p => p.theme.colors.text};

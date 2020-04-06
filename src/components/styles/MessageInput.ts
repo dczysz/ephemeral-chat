@@ -50,6 +50,7 @@ export const StyledMessageInput = styled.form<Props>`
       background-color: transparent;
       border: none;
       color: ${p => p.theme.colors.text};
+      font-size: 1rem;
       height: 100%;
       line-height: 1.2rem;
       max-height: ${p => (p.expand ? 'none' : '3.2rem')};

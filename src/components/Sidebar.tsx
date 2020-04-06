@@ -1,9 +1,11 @@
 import React from 'react';
+import { AiOutlineCloseCircle as CloseIcon } from 'react-icons/ai';
 
 import { StyledSidebar } from './styles';
 import UserList from './UserList';
 import LeaderOptions from './LeaderOptions';
 import { UserType } from '../store/socket';
+import Button from './Button';
 
 interface Props {
   users: UserType[];
@@ -11,6 +13,7 @@ interface Props {
   roomLeader: UserType | null;
   socket: SocketIOClient.Socket;
   isPrivate: boolean;
+  close: () => void;
 }
 
 const Sidebar: React.FC<Props> = ({
@@ -19,9 +22,15 @@ const Sidebar: React.FC<Props> = ({
   roomLeader,
   socket,
   isPrivate,
+  close,
 }) => {
   return (
     <StyledSidebar>
+      <div className="header tablet-only">
+        <Button onClick={close} bg="darker" icon>
+          <CloseIcon />
+        </Button>
+      </div>
       {roomLeader && (
         <LeaderOptions
           user={currentUser}

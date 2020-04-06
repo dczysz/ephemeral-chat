@@ -6,4 +6,10 @@ export const StyledSidebar = styled.div`
   height: 100%;
   max-width: 90vw;
   width: 18rem;
+
+  .header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem;
+  }
 `;

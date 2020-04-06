@@ -23,7 +23,6 @@ export const StyledModal = styled.div`
     background-color: ${p => p.theme.colors.bgDark};
     border-radius: ${p => p.theme.br};
     color: ${p => p.theme.colors.text};
-    margin-top: 1rem;
     max-width: ${p => p.theme.bp.tablet};
     padding: 1.5rem;
     width: 100%;

@@ -18,6 +18,7 @@ export const StyledInput = styled.input<StyledInputProps>`
   border-radius: 1000px;
   box-shadow: ${p => p.theme.bs.raised[p.bg ? p.bg : 'dark']};
   color: ${p => p.theme.colors.text};
+  font-size: 1rem;
   min-width: 6rem;
   padding: 1em 1.5em;
   width: 100%;

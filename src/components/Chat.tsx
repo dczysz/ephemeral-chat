@@ -225,6 +225,7 @@ const Chat: React.FC<RouteComponentProps<
               roomLeader={roomLeader}
               socket={socket}
               isPrivate={privateRoom}
+              close={() => setShowSidebar(false)}
             />
           </div>
           <div className="nav">

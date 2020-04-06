@@ -47,7 +47,7 @@ const MessageInput: React.FC<Props> = ({
           value={message}
           onChange={e => setMessage(e.target.value)}
           onKeyDown={handleKeyDown}
-          rows={Math.min(6, message.split('\n').length)}
+          rows={Math.min(3, message.split('\n').length)}
           ref={inputRef}
         />
         <Button
