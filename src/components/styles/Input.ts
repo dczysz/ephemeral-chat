@@ -24,6 +24,10 @@ export const StyledInput = styled.input<StyledInputProps>`
   height: 3rem;
   width: 100%;
 
+  ::placeholder {
+    color: ${p => p.theme.colors.textMuted};
+  }
+
   :focus {
     box-shadow: ${p => p.theme.bs.raised[p.bg ? p.bg : 'dark']},
       ${p => p.theme.bs.inset[p.bg ? p.bg : 'dark']};

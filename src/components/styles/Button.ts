@@ -19,6 +19,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
       : p.bg && p.bg === 'darker'
       ? p.theme.colors.bgDarker
       : 'transparent'};
+  align-items: center;
   background-color: var(--bg);
   border: 2px solid var(--bg);
   border-radius: 1000px;
@@ -26,14 +27,13 @@ export const StyledButton = styled.button<StyledButtonProps>`
   color: ${p =>
     p.primary && !p.disabled
       ? p.theme.colors.primary
-      : p.theme.colors.textMuted};
-  align-items: center;
+      : p.theme.colors.textMuteder};
   display: flex;
   font-size: 1rem;
   font-weight: bold;
   height: 3rem;
-  padding: 0 1.25rem;
   justify-content: center;
+  padding: 0 1.25rem;
 
   &.icon {
     fill: currentColor;
@@ -45,12 +45,22 @@ export const StyledButton = styled.button<StyledButtonProps>`
     }
   }
 
+  :focus {
+    color: ${p =>
+      p.primary && !p.disabled
+        ? p.theme.colors.primary
+        : p.theme.colors.textMuted};
+  }
+
   :hover,
-  :focus,
   :active {
     &:not(:disabled) {
       box-shadow: ${p => p.theme.bs.raised[p.bg ? p.bg : 'dark']},
         ${p => p.theme.bs.inset[p.bg ? p.bg : 'dark']};
+      color: ${p =>
+        p.primary && !p.disabled
+          ? p.theme.colors.primary
+          : p.theme.colors.textMuted};
       cursor: pointer;
     }
   }

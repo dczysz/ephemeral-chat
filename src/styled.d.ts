@@ -13,6 +13,7 @@ declare module 'styled-components' {
       success: string;
       text: string;
       textMuted: string;
+      textMuteder: string;
     };
     bp: {
       tablet: string;

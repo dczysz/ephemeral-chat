@@ -20,7 +20,8 @@ const colors = {
   primary: '#7289da',
   success: '#43b581',
   text: '#dcddde',
-  textMuted: '#878b92',
+  textMuted: '#afb1b6',
+  textMuteder: '#878b92',
 };
 
 const bs = {

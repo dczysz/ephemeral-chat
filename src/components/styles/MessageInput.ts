@@ -37,7 +37,7 @@ export const StyledMessageInput = styled.form<Props>`
     }
 
     .placeholder {
-      color: ${p => p.theme.colors.textMuted};
+      color: ${p => p.theme.colors.textMuteder};
       left: calc(1.5rem + 1px);
       margin: 0;
       pointer-events: none;
