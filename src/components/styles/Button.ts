@@ -29,9 +29,10 @@ export const StyledButton = styled.button<StyledButtonProps>`
       : p.theme.colors.textMuted};
   align-items: center;
   display: flex;
+  font-size: 1rem;
   font-weight: bold;
   height: 3rem;
-  padding: 1rem 1.25rem;
+  padding: 0 1.25rem;
   justify-content: center;
 
   &.icon {

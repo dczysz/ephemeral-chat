@@ -20,7 +20,8 @@ export const StyledInput = styled.input<StyledInputProps>`
   color: ${p => p.theme.colors.text};
   font-size: 1rem;
   min-width: 6rem;
-  padding: 1em 1.5em;
+  padding: 0 1.25rem;
+  height: 3rem;
   width: 100%;
 
   :focus {
