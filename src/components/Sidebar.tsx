@@ -1,5 +1,5 @@
 import React from 'react';
-import { AiOutlineCloseCircle as CloseIcon } from 'react-icons/ai';
+import { AiOutlineMenuUnfold as CloseIcon } from 'react-icons/ai';
 
 import { StyledSidebar } from './styles';
 import UserList from './UserList';
@@ -26,11 +26,13 @@ const Sidebar: React.FC<Props> = ({
 }) => {
   return (
     <StyledSidebar>
-      <div className="header tablet-only">
-        <Button onClick={close} bg="darker" icon>
+      <div className="buttons">
+        {/* <Button bg="darker">dark</Button> */}
+        <Button onClick={close} bg="darker" icon className="tablet-only">
           <CloseIcon />
         </Button>
       </div>
+
       {roomLeader && (
         <LeaderOptions
           user={currentUser}

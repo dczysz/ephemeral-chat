@@ -7,9 +7,20 @@ export const StyledSidebar = styled.div`
   max-width: 90vw;
   width: 18rem;
 
-  .header {
+  .buttons {
     display: flex;
+    flex-wrap: wrap-reverse;
     justify-content: flex-end;
-    padding: 1rem;
+    padding: 0 1rem;
+    padding-bottom: 0.5rem;
+
+    button {
+      margin-top: 1rem;
+      margin-left: 1rem;
+
+      &:first-of-type {
+        margin-left: 0;
+      }
+    }
   }
 `;

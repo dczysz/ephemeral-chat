@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { TiThMenu as MenuIcon } from 'react-icons/ti';
-import { AiFillEyeInvisible as PrivateIcon } from 'react-icons/ai';
+import {
+  AiOutlineEyeInvisible as PrivateIcon,
+  AiOutlineMenuFold as MenuIcon,
+} from 'react-icons/ai';
 
 import { StyledInfoBar } from './styles';
 import Button from './Button';

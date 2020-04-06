@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { MdSend as SendIcon } from 'react-icons/md';
-import { AiOutlineCloseCircle as CloseIcon } from 'react-icons/ai';
+import {
+  AiOutlineCloseCircle as CloseIcon,
+  AiOutlineCheckCircle as SendIcon,
+} from 'react-icons/ai';
 
 import { UserType } from '../store/socket';
 import { StyledLeaderOptions } from './styles';
