@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
+import { baseTheme } from './theme';
+
 export const StyledInfoBar = styled.div`
-  background-color: ${p => p.theme.colors.bgDark};
-  box-shadow: 0 2px 6px ${p => p.theme.colors.bgDarker};
-  color: ${p => p.theme.colors.text};
+  border-bottom: var(--border);
+  color: var(--text);
   display: flex;
   justify-content: center;
   padding: 1rem;
@@ -13,7 +14,7 @@ export const StyledInfoBar = styled.div`
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
-    max-width: ${p => p.theme.bp.desktop};
+    max-width: var(--bp-desktop);
     width: 100%;
   }
 
@@ -30,7 +31,7 @@ export const StyledInfoBar = styled.div`
       :hover,
       :active,
       :focus {
-        color: ${p => p.theme.colors.textMuted};
+        color: var(--text-muted);
       }
 
       h2 {
@@ -40,7 +41,7 @@ export const StyledInfoBar = styled.div`
 
     #hash,
     h3 {
-      color: ${p => p.theme.colors.textMuted};
+      color: var(--text-muted);
     }
 
     #hash {
@@ -56,7 +57,7 @@ export const StyledInfoBar = styled.div`
       text-overflow: ellipsis;
       white-space: nowrap;
 
-      @media screen and (min-width: ${p => p.theme.bp.tablet}) {
+      @media screen and (min-width: ${baseTheme.bp.tablet}) {
         max-width: none;
       }
     }
@@ -67,7 +68,7 @@ export const StyledInfoBar = styled.div`
     display: flex;
 
     > svg {
-      fill: ${p => p.theme.colors.textMuted};
+      fill: var(--text-muted);
       height: 1.5rem;
       margin-right: 0.5rem;
       width: 1.5rem;

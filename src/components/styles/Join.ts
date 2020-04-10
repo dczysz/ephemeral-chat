@@ -9,16 +9,18 @@ export const StyledJoin = styled.div`
 
     label {
       span {
-        color: ${p => p.theme.colors.textMuted};
+        color: var(--text-muted);
         display: inline-block;
         margin: 0 0 0.5rem 0.5rem;
       }
 
-      input {
+      .input {
         margin-bottom: 1rem;
 
-        ::placeholder {
-          color: ${p => p.theme.colors.text};
+        input {
+          ::placeholder {
+            color: var(--text);
+          }
         }
       }
     }

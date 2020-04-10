@@ -7,27 +7,25 @@ export interface StyledButtonProps {
   primary?: boolean;
   type?: 'button' | 'submit' | 'reset';
   style?: any;
-  bg?: 'dark' | 'darker';
+  bg?: 'dark';
   disabled?: boolean;
   ref?: React.MutableRefObject<HTMLButtonElement>;
 }
 
 export const StyledButton = styled.button<StyledButtonProps>`
   --bg: ${p =>
-    p.bg && p.bg === 'dark'
-      ? p.theme.colors.bgDark
-      : p.bg && p.bg === 'darker'
-      ? p.theme.colors.bgDarker
-      : 'transparent'};
+    p.bg && p.bg === 'dark' ? 'var(--color-bg-dark)' : 'var(--color-bg)'};
+  --inset: ${p =>
+    p.bg && p.bg === 'dark' ? 'var(--bs-inset-dark)' : 'var(--bs-inset)'};
+  --raised: ${p =>
+    p.bg && p.bg === 'dark' ? 'var(--bs-raised-dark)' : 'var(--bs-raised)'};
   align-items: center;
-  background-color: var(--bg);
-  border: 2px solid var(--bg);
+  background-color: transparent;
+  border: 2px solid transparent;
   border-radius: 1000px;
-  box-shadow: ${p => p.theme.bs.raised[p.bg ? p.bg : 'dark']};
+  box-shadow: var(--raised);
   color: ${p =>
-    p.primary && !p.disabled
-      ? p.theme.colors.primary
-      : p.theme.colors.textMuteder};
+    p.primary && !p.disabled ? 'var(--color-primary)' : 'var(--text-muted)'};
   display: flex;
   font-size: 1rem;
   font-weight: bold;
@@ -42,25 +40,23 @@ export const StyledButton = styled.button<StyledButtonProps>`
     svg {
       height: 100%;
       width: auto;
+      pointer-events: none;
     }
   }
 
-  :focus {
-    color: ${p =>
-      p.primary && !p.disabled
-        ? p.theme.colors.primary
-        : p.theme.colors.textMuted};
+  :focus:not(:disabled) {
+    color: ${p => (p.primary ? 'var(--color-primary)' : 'var(--text-muteder)')};
+    border: var(--border);
   }
 
   :hover,
   :active {
     &:not(:disabled) {
-      box-shadow: ${p => p.theme.bs.raised[p.bg ? p.bg : 'dark']},
-        ${p => p.theme.bs.inset[p.bg ? p.bg : 'dark']};
+      box-shadow: var(--raised), var(--inset);
       color: ${p =>
         p.primary && !p.disabled
-          ? p.theme.colors.primary
-          : p.theme.colors.textMuted};
+          ? 'var(--color-primary)'
+          : 'var(--text-muteder)'};
       cursor: pointer;
     }
   }

@@ -1,23 +1,20 @@
 import styled from 'styled-components';
 
 export interface StyledInputProps {
-  bg?: 'dark' | 'darker';
+  bg?: 'dark';
   type?: 'text' | 'password';
   className?: string;
 }
 
 export const StyledInput = styled.input<StyledInputProps>`
   --bg: ${p =>
-    p.bg && p.bg === 'dark'
-      ? p.theme.colors.bgDark
-      : p.bg && p.bg === 'darker'
-      ? p.theme.colors.bgDarker
-      : 'transparent'};
-  background-color: var(--bg);
-  border: 2px solid var(--bg);
+    p.bg && p.bg === 'dark' ? 'var(--color-bg-dark)' : 'var(--color-bg)'};
+  background-color: transparent;
+  border: 2px solid transparent;
   border-radius: 1000px;
-  box-shadow: ${p => p.theme.bs.raised[p.bg ? p.bg : 'dark']};
-  color: ${p => p.theme.colors.text};
+  box-shadow: ${p =>
+    p.bg && p.bg === 'dark' ? 'var(--bs-raised-dark)' : 'var(--bs-raised)'};
+  color: var(--text);
   font-size: 1rem;
   min-width: 6rem;
   padding: 0 1.25rem;
@@ -25,11 +22,12 @@ export const StyledInput = styled.input<StyledInputProps>`
   width: 100%;
 
   ::placeholder {
-    color: ${p => p.theme.colors.textMuted};
+    color: var(--text-muted);
   }
 
   :focus {
-    box-shadow: ${p => p.theme.bs.raised[p.bg ? p.bg : 'dark']},
-      ${p => p.theme.bs.inset[p.bg ? p.bg : 'dark']};
+    border: var(--border);
+    box-shadow: ${p => (p.bg ? 'var(--bs-raised-dark)' : 'var(--bs-raised)')},
+      ${p => (p.bg ? 'var(--bs-inset-dark)' : 'var(--bs-inset)')};
   }
 `;

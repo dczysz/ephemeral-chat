@@ -1,7 +1,10 @@
 import styled, { keyframes } from 'styled-components';
 
+import { ThemeModeType } from '../../store/ThemeToggleContext';
+
 interface Props {
   showSidebar: boolean;
+  themeMode: ThemeModeType;
 }
 
 const glowAnimation = keyframes`
@@ -18,8 +21,8 @@ const appearAnimation = keyframes`
 `;
 
 export const StyeldChat = styled.div<Props>`
-  background-color: ${p => p.theme.colors.bg};
-  color: ${p => p.theme.colors.text};
+  background-color: var(--color-bg);
+  color: var(--text);
   display: grid;
   grid-template-columns: 1fr auto;
   grid-template-rows: auto 1fr auto;
@@ -39,11 +42,13 @@ export const StyeldChat = styled.div<Props>`
     grid-area: messages;
     overflow: hidden; /* Needed or else parent grows */
   }
+
   .input {
     grid-area: input;
   }
 
   .sidebar {
+    background-color: inherit;
     bottom: 0;
     grid-area: sidebar;
     position: absolute;
@@ -52,7 +57,7 @@ export const StyeldChat = styled.div<Props>`
     transform: translateX(
       ${(p: { showSidebar: boolean }) => (p.showSidebar ? '0%' : '100%')}
     );
-    transition: transform ${p => p.theme.time.long};
+    transition: transform var(--time-long);
     z-index: 1;
   }
 
@@ -73,9 +78,9 @@ export const StyeldChat = styled.div<Props>`
 
   .loading-overlay {
     align-items: center;
-    background-color: ${p => p.theme.colors.bgDarker};
+    background-color: var(--color-bg);
     bottom: 0;
-    color: ${p => p.theme.colors.textMuted};
+    color: var(--text-muted);
     display: flex;
     justify-content: center;
     left: 0;
@@ -86,7 +91,7 @@ export const StyeldChat = styled.div<Props>`
     right: 0;
     text-align: center;
     top: 0;
-    transition: opacity ${p => p.theme.time.long};
+    transition: opacity var(--time-long);
     z-index: 1;
 
     .glow {

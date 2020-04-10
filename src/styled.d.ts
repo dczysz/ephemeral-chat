@@ -4,10 +4,12 @@ declare module 'styled-components' {
   export interface DefaultTheme {
     br: string;
     colors: {
+      border: string;
+      borderLight: string;
       bg: string;
       bgDark: string;
-      bgDarker: string;
       bgLight: string;
+      bs: string;
       danger: string;
       primary: string;
       success: string;
@@ -22,16 +24,12 @@ declare module 'styled-components' {
     };
     bs: {
       raised: {
+        bg: string;
         dark: string;
-        darker: string;
       };
       inset: {
+        bg: string;
         dark: string;
-        darker: string;
-      };
-      grooved: {
-        light: string;
-        primary: string;
       };
     };
     time: {

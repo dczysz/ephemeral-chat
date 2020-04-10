@@ -10,6 +10,7 @@ interface Props extends StyledInputProps {
   maxLength?: number;
   ref?: React.MutableRefObject<HTMLInputElement>;
   type?: 'text' | 'password';
+  tabIndex?: number;
 }
 
 const Input: React.FC<Props> = ({
@@ -22,18 +23,16 @@ const Input: React.FC<Props> = ({
   ...rest
 }) => {
   return (
-    <>
-      <StyledInput
-        autoComplete="off"
-        type={type}
-        value={value}
-        onChange={onChange}
-        onKeyDown={onKeyDown}
-        placeholder={placeholder || ''}
-        maxLength={maxLength || 30000}
-        {...rest}
-      />
-    </>
+    <StyledInput
+      autoComplete="off"
+      type={type}
+      value={value}
+      onChange={onChange}
+      onKeyDown={onKeyDown}
+      placeholder={placeholder || ''}
+      maxLength={maxLength || 30000}
+      {...rest}
+    />
   );
 };
 

@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import { baseTheme } from './theme';
 
 const animation = keyframes`
   from { opacity: 0;}
@@ -7,8 +8,8 @@ const animation = keyframes`
 
 export const StyledModal = styled.div`
   align-items: flex-start;
-  animation: ${animation} ${p => p.theme.time.long};
-  background-color: ${p => p.theme.colors.bgDarker};
+  animation: ${animation} var(--time-long);
+  background-color: var(--color-bg);
   bottom: 0;
   display: flex;
   justify-content: center;
@@ -20,10 +21,10 @@ export const StyledModal = styled.div`
   top: 0;
 
   .modal {
-    background-color: ${p => p.theme.colors.bgDark};
-    border-radius: ${p => p.theme.br};
-    color: ${p => p.theme.colors.text};
-    max-width: ${p => p.theme.bp.tablet};
+    border: var(--border);
+    border-radius: var(--br);
+    color: var(--text);
+    max-width: var(--bp-tablet);
     padding: 1.5rem;
     width: 100%;
 
@@ -33,7 +34,7 @@ export const StyledModal = styled.div`
     }
   }
 
-  @media screen and (min-width: ${p => p.theme.bp.laptop}) {
+  @media (min-width: ${baseTheme.bp.laptop}) {
     align-items: center;
   }
 `;

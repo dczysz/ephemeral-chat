@@ -1,12 +1,12 @@
 import styled from 'styled-components';
+import { ThemeModeType } from '../../store/ThemeToggleContext';
 
 interface Props {
   fromCurrentUser: boolean;
+  themeMode: ThemeModeType;
 }
 
 export const StyledMessage = styled.div<Props>`
-  --bg: ${p =>
-    p.fromCurrentUser ? p.theme.colors.primary : p.theme.colors.bgLight};
   align-items: ${p => (p.fromCurrentUser ? 'flex-end' : 'flex-start')};
   align-self: ${p => (p.fromCurrentUser ? 'flex-end' : 'flex-start')};
   display: flex;
@@ -23,16 +23,19 @@ export const StyledMessage = styled.div<Props>`
     }
   }
   .message-text {
-    background-color: var(--bg);
-    border-radius: ${p => p.theme.br};
-    box-shadow: ${p =>
-      p.theme.bs.grooved[p.fromCurrentUser ? 'primary' : 'light']};
+    background-color: ${p =>
+      p.themeMode === 'light'
+        ? 'var(--color-bg-dark)'
+        : 'var(--color-bg-light)'};
+    border-radius: var(--br);
+    box-shadow: var(--bs-grooved-primary);
+    color: var(--text);
     max-width: 100%;
     padding: 1rem;
 
     pre {
       margin: 0;
-      max-width: ${p => p.theme.bp.tablet};
+      max-width: var(--bp-tablet);
       white-space: pre-wrap;
       word-wrap: break-word;
     }

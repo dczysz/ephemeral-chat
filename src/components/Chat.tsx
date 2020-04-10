@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import io from 'socket.io-client';
 import { RouteComponentProps, StaticContext } from 'react-router';
 
@@ -20,6 +20,7 @@ import useClickOutside from '../hooks/useClickOutside';
 import { validateInput } from '../util';
 import Button from './Button';
 import Input from './Input';
+import ThemeToggleContext from '../store/ThemeToggleContext';
 
 let socket: SocketIOClient.Socket;
 
@@ -53,6 +54,7 @@ const Chat: React.FC<RouteComponentProps<
   const [roomPassword, setRoomPassword] = useState('');
   const [loading, setLoading] = useState(true);
   const sidebarRef = useRef(null!);
+  const { themeMode } = useContext(ThemeToggleContext);
 
   useClickOutside(sidebarRef, () =>
     showSidebar ? setShowSidebar(false) : null
@@ -63,6 +65,9 @@ const Chat: React.FC<RouteComponentProps<
     // Fix back button not closing socket
     //TODO: Still not actually disconnecting
     if (socket) {
+      // Don't reconnect if something like theme changes
+      if (socket.id === user.id) return;
+
       console.log('Existing socket found, disconnecting before rejoining');
       socket.emit('disconnect');
       socket.close();
@@ -96,7 +101,7 @@ const Chat: React.FC<RouteComponentProps<
       socket.off('join');
       socket.emit('disconnect');
     };
-  }, [match.params, history.location.state]);
+  }, [user.id, match.params, history.location.state]);
 
   useEffect(() => {
     socket.on('message', (message: MessageType) => {
@@ -177,7 +182,7 @@ const Chat: React.FC<RouteComponentProps<
   };
 
   return (
-    <StyeldChat showSidebar={showSidebar}>
+    <StyeldChat showSidebar={showSidebar} themeMode={themeMode}>
       {error ? (
         <Modal heading={error.type === 'password' ? 'private room' : 'uh oh!'}>
           <p>{error.msg}</p>
@@ -215,19 +220,6 @@ const Chat: React.FC<RouteComponentProps<
         </Modal>
       ) : (
         <>
-          <div className="messages">
-            <Messages messages={messages} currentUser={user} />
-          </div>
-          <div className="sidebar" ref={sidebarRef}>
-            <Sidebar
-              users={users}
-              currentUser={user}
-              roomLeader={roomLeader}
-              socket={socket}
-              isPrivate={privateRoom}
-              close={() => setShowSidebar(false)}
-            />
-          </div>
           <div className="nav">
             <InfoBar
               room={user.room}
@@ -242,6 +234,20 @@ const Chat: React.FC<RouteComponentProps<
               sendMessage={sendMessage}
             />
           </div>
+          <div className="sidebar" ref={sidebarRef}>
+            <Sidebar
+              users={users}
+              currentUser={user}
+              roomLeader={roomLeader}
+              socket={socket}
+              isPrivate={privateRoom}
+              close={() => setShowSidebar(false)}
+            />
+          </div>
+          <div className="messages">
+            <Messages messages={messages} currentUser={user} />
+          </div>
+
           <div className={['loading-overlay', loading ? 'show' : ''].join(' ')}>
             <div>
               <h1 className="glow">loading...</h1>

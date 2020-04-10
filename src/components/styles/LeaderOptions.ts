@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const StyledLeaderOptions = styled.div`
   padding: 1rem;
-  border-bottom: 2px groove ${p => p.theme.colors.bgDark};
+  border-bottom: var(--border-light);
 
   .heading {
     margin: 0;
@@ -22,7 +22,7 @@ export const StyledLeaderOptions = styled.div`
     }
   }
 
-  input[type='password'] {
+  .input {
     margin-right: 1rem;
   }
 `;

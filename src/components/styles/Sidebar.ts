@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const StyledSidebar = styled.div`
-  background-color: ${p => p.theme.colors.bgDarker};
-  color: ${p => p.theme.colors.textMuted};
+  border-left: var(--border-light);
+  color: var(--sidebar-text-muted);
   height: 100%;
   max-width: 90vw;
   width: 18rem;

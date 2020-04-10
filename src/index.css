@@ -50,3 +50,7 @@ textarea:focus {
   pointer-events: none !important;
   position: absolute !important;
 }
+
+input {
+  -webkit-appearance: none; /* Fix box shadows on Safari */
+}

@@ -8,7 +8,7 @@ export const StyledUserList = styled.div`
   }
 
   ul {
-    color: ${p => p.theme.colors.textMuted};
+    color: var(--sidebar-text-muted);
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -20,12 +20,12 @@ export const StyledUserList = styled.div`
       padding: 1rem 0;
 
       &.current-user {
-        color: ${p => p.theme.colors.text};
+        color: var(--sidebar-text);
         font-weight: bold;
       }
 
       ::before {
-        background-color: ${p => p.theme.colors.success};
+        background-color: var(--color-success);
         border-radius: 50%;
         content: '';
         display: inline-block;

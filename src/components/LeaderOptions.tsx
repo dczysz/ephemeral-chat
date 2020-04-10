@@ -75,13 +75,15 @@ const LeaderOptions: React.FC<Props> = ({
             type="password"
             aria-label="room password"
             aria-hidden={passStatus === 'collapsed'}
-            bg="darker"
-            className={passStatus === 'collapsed' ? 'hidden' : ''}
+            className={[
+              'input',
+              passStatus === 'collapsed' ? 'hidden' : '',
+            ].join(' ')}
+            tabIndex={passStatus === 'collapsed' ? -1 : 0}
           />
 
           <Button
             type="submit"
-            bg="darker"
             icon={passStatus !== 'collapsed'}
             primary={passStatus !== 'collapsed' && newRoomPass.length > 0}
             aria-label={

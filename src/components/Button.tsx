@@ -4,6 +4,7 @@ import { StyledButton, StyledButtonProps } from './styles';
 
 interface Props extends StyledButtonProps {
   icon?: boolean;
+  tabIndex?: number;
 }
 
 const Button: React.FC<Props> = ({

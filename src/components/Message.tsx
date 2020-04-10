@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { MessageType, UserType } from '../store/socket';
 
 import { StyledMessage } from './styles';
+import ThemeToggleContext from '../store/ThemeToggleContext';
 
 interface Props {
   message: MessageType;
@@ -9,6 +10,8 @@ interface Props {
 }
 
 const Message: React.FC<Props> = ({ message: { user, text }, currentUser }) => {
+  const { themeMode } = useContext(ThemeToggleContext);
+
   const isSentByCurrentUser =
     currentUser.name === user.name && user.num && currentUser.num === user.num
       ? true
@@ -18,7 +21,7 @@ const Message: React.FC<Props> = ({ message: { user, text }, currentUser }) => {
   const messageFromName = user.name + (user.num ? `#${user.num}` : '');
 
   return (
-    <StyledMessage fromCurrentUser={isSentByCurrentUser}>
+    <StyledMessage fromCurrentUser={isSentByCurrentUser} themeMode={themeMode}>
       <div className="sent-by">
         <p>{messageFromName}</p>
       </div>

@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { AiOutlineMenuUnfold as CloseIcon } from 'react-icons/ai';
+import { FiSun as LightIcon, FiMoon as DarkIcon } from 'react-icons/fi';
 
 import { StyledSidebar } from './styles';
+import { UserType } from '../store/socket';
 import UserList from './UserList';
 import LeaderOptions from './LeaderOptions';
-import { UserType } from '../store/socket';
 import Button from './Button';
+import ThemeToggleContext from '../store/ThemeToggleContext';
 
 interface Props {
   users: UserType[];
@@ -24,11 +26,15 @@ const Sidebar: React.FC<Props> = ({
   isPrivate,
   close,
 }) => {
+  const { themeMode, toggleTheme } = useContext(ThemeToggleContext);
+
   return (
     <StyledSidebar>
       <div className="buttons">
-        {/* <Button bg="darker">dark</Button> */}
-        <Button onClick={close} bg="darker" icon className="tablet-only">
+        <Button onClick={toggleTheme} icon>
+          {themeMode === 'light' ? <DarkIcon /> : <LightIcon />}
+        </Button>
+        <Button onClick={close} icon className="tablet-only">
           <CloseIcon />
         </Button>
       </div>

@@ -6,28 +6,26 @@ interface Props {
 
 export const StyledMessageInput = styled.form<Props>`
   align-items: ${p => (p.expand ? 'flex-start' : 'center')};
-  background-color: ${p => p.theme.colors.bgDark};
-  box-shadow: 0 -2px 6px ${p => p.theme.colors.bgDarker};
+  border-top: var(--border);
   display: flex;
   justify-content: center;
   padding: 1rem;
 
   .input {
-    --time: ${p => p.theme.time.long};
     align-items: ${p => (p.expand ? 'flex-end' : 'center')};
-    background-color: transparent;
     border: 2px solid transparent;
     border-radius: 1.7rem;
-    box-shadow: ${p => p.theme.bs.raised.dark};
+    box-shadow: var(--bs-raised);
     display: flex;
-    max-width: ${p => p.theme.bp.laptop};
+    max-width: var(--bp-laptop);
     padding-left: 0.5rem;
     position: relative;
-    transition: box-shadow ${p => p.theme.time.short};
+    transition: box-shadow var(--time-short), border var(--time-short);
     width: 100%;
 
     :focus-within {
-      box-shadow: ${p => p.theme.bs.raised.dark}, ${p => p.theme.bs.inset.dark};
+      border: var(--border);
+      box-shadow: var(--bs-raised), var(--bs-inset);
     }
 
     :not(:focus-within) {
@@ -37,7 +35,7 @@ export const StyledMessageInput = styled.form<Props>`
     }
 
     .placeholder {
-      color: ${p => p.theme.colors.textMuteder};
+      color: var(--text-muteder);
       left: calc(1.5rem + 1px);
       margin: 0;
       pointer-events: none;
@@ -49,7 +47,7 @@ export const StyledMessageInput = styled.form<Props>`
     textarea {
       background-color: transparent;
       border: none;
-      color: ${p => p.theme.colors.text};
+      color: var(--text);
       font-size: 1rem;
       height: 100%;
       line-height: 1.2rem;
