@@ -7,11 +7,19 @@ import Chat from './components/Chat';
 import ThemeToggleContext from './store/ThemeToggleContext';
 import { ThemeProvider } from 'styled-components';
 
+const localStorageTheme = window.localStorage.getItem('theme');
+const defaultThemeMode =
+  localStorageTheme === 'light' || localStorageTheme === 'dark'
+    ? localStorageTheme
+    : 'dark';
+
 const App = () => {
-  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
+  const [theme, setTheme] = useState<'light' | 'dark'>(defaultThemeMode);
 
   const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    window.localStorage.setItem('theme', newTheme);
+    setTheme(newTheme);
   };
 
   return (
