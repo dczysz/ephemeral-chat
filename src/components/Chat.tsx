@@ -68,7 +68,7 @@ const Chat: React.FC<RouteComponentProps<
     //TODO: Still not actually disconnecting
     if (socket) {
       // Don't reconnect if something like theme changes
-      if (socket.id === user.id) return;
+      if (socket.id === user.id) return setLoading(false);
 
       console.log('Existing socket found, disconnecting before rejoining');
       socket.emit('disconnect');
