@@ -14,8 +14,7 @@
 html,
 body {
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif, 'DejaVu Sans Mono', 'Courier New',
-    Courier, monospace;
+  font-family: 'DejaVu Sans Mono', 'Courier New', Courier, monospace;
   font-size: 16px;
   margin: 0;
   padding: 0;
