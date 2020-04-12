@@ -16,7 +16,7 @@ export const StyledInput = styled.input<StyledInputProps>`
     p.bg && p.bg === 'dark' ? 'var(--bs-raised-dark)' : 'var(--bs-raised)'};
   color: var(--text);
   font-size: 1rem;
-  min-width: 6rem;
+  min-width: 4rem;
   padding: 0 1.25rem;
   height: 3rem;
   width: 100%;

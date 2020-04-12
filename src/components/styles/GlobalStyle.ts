@@ -30,7 +30,6 @@ export const GlobalStyle = createGlobalStyle<Props>`
     --time-long: ${p => p.theme.time.long};
   }
 
-
   *,
   *::before,
   *::after {

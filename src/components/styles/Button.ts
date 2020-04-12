@@ -36,6 +36,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
 
   &.icon {
     fill: currentColor;
+    min-width: 3rem;
     padding: 0.5rem;
 
     svg {

@@ -89,6 +89,7 @@ export const StyledMessageInput = styled.form<Props>`
       height: 2.5rem;
       margin-right: 0.35rem;
       margin-bottom: ${p => (p.expand ? '0.35rem' : '')};
+      min-width: 2.5rem;
       width: 2.5rem;
 
       &.loading svg {
