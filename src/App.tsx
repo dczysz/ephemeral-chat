@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 import { GlobalStyle, darkTheme, lightTheme } from './components/styles';
 import Join from './components/Join';
@@ -23,24 +24,25 @@ const App = () => {
   };
 
   return (
-    <>
-      <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-        <GlobalStyle />
+    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+      <GlobalStyle />
+      <Helmet>
+        <title>ephemeral chat</title>
+      </Helmet>
 
-        <ThemeToggleContext.Provider value={{ themeMode: theme, toggleTheme }}>
-          <BrowserRouter>
-            <Switch>
-              <Route exact path="/" component={Join} />
-              <Route path="/chat/:room" component={Chat} />
-              <Route>
-                {/* Default to '/' if no match */}
-                <Redirect to="/" />
-              </Route>
-            </Switch>
-          </BrowserRouter>
-        </ThemeToggleContext.Provider>
-      </ThemeProvider>
-    </>
+      <ThemeToggleContext.Provider value={{ themeMode: theme, toggleTheme }}>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={Join} />
+            <Route path="/chat/:room" component={Chat} />
+            <Route>
+              {/* Default to '/' if no match */}
+              <Redirect to="/" />
+            </Route>
+          </Switch>
+        </BrowserRouter>
+      </ThemeToggleContext.Provider>
+    </ThemeProvider>
   );
 };
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import io from 'socket.io-client';
 import { RouteComponentProps, StaticContext } from 'react-router';
+import { Helmet } from 'react-helmet';
 
 import { StyeldChat } from './styles';
 import {
@@ -183,6 +184,10 @@ const Chat: React.FC<RouteComponentProps<
 
   return (
     <StyeldChat showSidebar={showSidebar} themeMode={themeMode}>
+      <Helmet titleTemplate="ephemeral chat #%s">
+        <title>{user.room}</title>
+      </Helmet>
+
       {error ? (
         <Modal heading={error.type === 'password' ? 'private room' : 'uh oh!'}>
           <p>{error.msg}</p>
