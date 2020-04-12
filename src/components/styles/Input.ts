@@ -10,7 +10,7 @@ export const StyledInput = styled.input<StyledInputProps>`
   --bg: ${p =>
     p.bg && p.bg === 'dark' ? 'var(--color-bg-dark)' : 'var(--color-bg)'};
   background-color: transparent;
-  border: 2px solid transparent;
+  border: var(--border-light);
   border-radius: 1000px;
   box-shadow: ${p =>
     p.bg && p.bg === 'dark' ? 'var(--bs-raised-dark)' : 'var(--bs-raised)'};

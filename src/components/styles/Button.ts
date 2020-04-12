@@ -21,7 +21,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
     p.bg && p.bg === 'dark' ? 'var(--bs-raised-dark)' : 'var(--bs-raised)'};
   align-items: center;
   background-color: transparent;
-  border: 2px solid transparent;
+  border: var(--border-light);
   border-radius: 1000px;
   box-shadow: var(--raised);
   color: ${p =>

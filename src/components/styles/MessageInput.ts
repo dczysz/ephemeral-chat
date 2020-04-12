@@ -13,7 +13,7 @@ export const StyledMessageInput = styled.form<Props>`
 
   .input {
     align-items: ${p => (p.expand ? 'flex-end' : 'center')};
-    border: 2px solid transparent;
+    border: var(--border-light);
     border-radius: 1.7rem;
     box-shadow: var(--bs-raised);
     display: flex;
