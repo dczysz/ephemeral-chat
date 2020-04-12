@@ -8,12 +8,14 @@ interface Props {
   message: string;
   setMessage: (message: string) => void;
   sendMessage: (e?: React.FormEvent<HTMLFormElement>) => void;
+  loading: boolean;
 }
 
 const MessageInput: React.FC<Props> = ({
   message,
   setMessage,
   sendMessage,
+  loading,
 }) => {
   const inputRef = useRef<HTMLTextAreaElement>(null!);
 
@@ -49,13 +51,15 @@ const MessageInput: React.FC<Props> = ({
           onKeyDown={handleKeyDown}
           rows={Math.min(3, message.split('\n').length)}
           ref={inputRef}
+          disabled={loading}
         />
         <Button
           type="submit"
           primary
-          disabled={message.length < 1}
+          disabled={message.length < 1 || loading}
           aria-label="send message"
           icon
+          className={loading ? 'loading' : ''}
         >
           <MdSend />
         </Button>

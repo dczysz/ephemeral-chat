@@ -54,6 +54,7 @@ const Chat: React.FC<RouteComponentProps<
   const [error, setError] = useState<ErrorType | null>(null);
   const [roomPassword, setRoomPassword] = useState('');
   const [loading, setLoading] = useState(true);
+  const [sendMessageLoading, setSendMessageLoading] = useState(false);
   const sidebarRef = useRef(null!);
   const { themeMode } = useContext(ThemeToggleContext);
 
@@ -136,8 +137,13 @@ const Chat: React.FC<RouteComponentProps<
           return;
         }
 
+        setSendMessageLoading(true);
+
         socket.emit('sendMessage', _message, (error: string) => {
-          error ? setError({ msg: error, type: 'fatal' }) : setMessage('');
+          if (error) return setError({ msg: error, type: 'fatal' });
+
+          setMessage('');
+          setSendMessageLoading(false);
         });
       }
     } else {
@@ -237,6 +243,7 @@ const Chat: React.FC<RouteComponentProps<
               message={message}
               setMessage={setMessage}
               sendMessage={sendMessage}
+              loading={sendMessageLoading}
             />
           </div>
           <div className="sidebar" ref={sidebarRef}>

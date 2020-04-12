@@ -31,6 +31,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
   font-weight: bold;
   height: 3rem;
   justify-content: center;
+  overflow: hidden;
   padding: 0 1.25rem;
 
   &.icon {

@@ -1,4 +1,31 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const sendingAnimation = keyframes`
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+  10% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+  49% {
+    transform: translate3d(200%, 0, 0);
+    opacity: 0;
+  }
+  50% {
+    transform: translate3d(-200%, 0, 0);
+    opacity: 0;
+  }
+  90% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+`;
 
 interface Props {
   expand: boolean;
@@ -63,6 +90,10 @@ export const StyledMessageInput = styled.form<Props>`
       margin-right: 0.35rem;
       margin-bottom: ${p => (p.expand ? '0.35rem' : '')};
       width: 2.5rem;
+
+      &.loading svg {
+        animation: ${sendingAnimation} 2s infinite;
+      }
     }
   }
 `;
